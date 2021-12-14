@@ -12,14 +12,14 @@ public class Domination extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("On");
         game = new Game();
+        RegisterListeners.register();
+        getLogger().info("On");
     }
 
     @Override
     public void onDisable() {
         this.game.setGameStats(GameStats.CLOSING);
-        RegisterListeners.register();
         getLogger().info("Off");
     }
 

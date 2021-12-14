@@ -17,6 +17,7 @@ public class RegisterListeners {
             return;
         pluginManager = Bukkit.getPluginManager();
         listeners = new Listener[] {
+                new PlayerListeners()
                 // Put all listeners's instance.
         };
         for (Listener listener : listeners)
