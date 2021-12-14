@@ -32,4 +32,12 @@ public class Domination extends JavaPlugin {
             return null;
         return (Domination) plugin;
     }
+
+    public static Game getGameInstance() {
+        final Domination dominationPlugin = getInstance();
+
+        if (dominationPlugin == null)
+            return null;
+        return dominationPlugin.getGame();
+    }
 }
