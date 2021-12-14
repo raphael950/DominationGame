@@ -12,7 +12,7 @@ public class Domination extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("[Domination] On");
+        getLogger().info("On");
         game = new Game();
     }
 
@@ -20,7 +20,7 @@ public class Domination extends JavaPlugin {
     public void onDisable() {
         this.game.setGameStats(GameStats.CLOSING);
         RegisterListeners.register();
-        getLogger().info("[Domination] Off");
+        getLogger().info("Off");
     }
 
     public Game getGame() {
