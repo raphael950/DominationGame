@@ -1,6 +1,7 @@
 package net.hydramc.domination;
 
 import fr.mrcubee.finder.plugin.PluginFinder;
+import fr.mrmicky.fastinv.FastInvManager;
 import net.hydramc.GameStats;
 import net.hydramc.domination.listeners.RegisterListeners;
 import org.bukkit.plugin.Plugin;
@@ -14,6 +15,7 @@ public class Domination extends JavaPlugin {
     public void onEnable() {
         game = new Game();
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        FastInvManager.register(this);
         RegisterListeners.register();
         getLogger().info("On");
     }

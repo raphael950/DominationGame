@@ -1,16 +1,15 @@
 package net.hydramc.domination.listeners;
 
 import net.hydramc.domination.Domination;
+import net.hydramc.domination.gui.TeamSelector;
 import net.hydramc.domination.utils.ActionBar;
 import net.hydramc.domination.utils.Utils;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
 
@@ -27,6 +26,7 @@ public class PlayerListeners implements Listener {
 
             case DURING:
                 // spec
+                break;
         }
     }
 
@@ -40,6 +40,7 @@ public class PlayerListeners implements Listener {
 
             case DURING:
                 // spec
+                break;
         }
     }
 
@@ -51,7 +52,7 @@ public class PlayerListeners implements Listener {
                 Utils.sendToLobby(player);
                 break;
             case BANNER:
-                // team selector
+                new TeamSelector().open(player);
                 break;
 
         }

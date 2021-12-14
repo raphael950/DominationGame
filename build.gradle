@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 group 'net.hydramc'
@@ -8,6 +9,7 @@ version '1.0'
 repositories {
     mavenCentral()
     maven { url 'https://nexus.mrcubee.net/repository/minecraft/' }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -17,6 +19,11 @@ dependencies {
     implementation 'fr.mrcubee.minecraft.library:plugin-annotation:1.0'
     implementation 'fr.mrcubee.minecraft.library:plugin-finder:1.0'
     implementation 'fr.mrcubee.minecraft.library:languagelib:1.0'
+    implementation 'fr.mrmicky:FastInv:3.0.3'
+}
+
+shadowJar {
+    relocate 'fr.mrmicky.fastinv', 'net.hydramc.domination'
 }
 
 test {
