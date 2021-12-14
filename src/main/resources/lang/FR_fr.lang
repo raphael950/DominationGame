@@ -1,4 +1,5 @@
 game.waitting.join_action_bar=&f%s &7a rejoint ! &8(&a1&8/&a30&8)
 game.waitting.leave_action_bar=&f%s &7a quitté ! &8(&c1&8/&c30&8)
 game.waiting.item.team_selector=&aEquipe &8| &7Clic droit
+game.waiting.item.kit_selector=&bClasse &8| &7Clic droit
 game.waiting.item.lobby_item=&cQuitter &8| &7Clic droit

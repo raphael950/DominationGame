@@ -13,6 +13,7 @@ public class Domination extends JavaPlugin {
     @Override
     public void onEnable() {
         game = new Game();
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         RegisterListeners.register();
         getLogger().info("On");
     }

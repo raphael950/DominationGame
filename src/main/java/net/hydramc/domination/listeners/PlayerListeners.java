@@ -48,10 +48,11 @@ public class PlayerListeners implements Listener {
         Player player = event.getPlayer();
         switch (event.getItem().getType()) {
             case BED:
-                // lobby
+                Utils.sendToLobby(player);
                 break;
             case BANNER:
                 // team selector
+                break;
 
         }
     }

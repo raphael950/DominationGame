@@ -1,6 +1,9 @@
 package net.hydramc.domination.utils;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import fr.mrcubee.langlib.Lang;
+import net.hydramc.domination.Domination;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -26,6 +29,13 @@ public class Utils {
     public static void teleportToSpawn(Player player) {
         Location loc = player.getLocation().getWorld().getSpawnLocation();
         player.teleport(loc);
+    }
+
+    public static void sendToLobby(Player player) {
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("Connect");
+        out.writeUTF("lobby");
+        player.sendPluginMessage(Domination.getInstance(), "BungeeCord", out.toByteArray());
     }
 
 }
