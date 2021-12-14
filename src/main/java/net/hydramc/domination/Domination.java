@@ -2,6 +2,7 @@ package net.hydramc.domination;
 
 import fr.mrcubee.finder.plugin.PluginFinder;
 import net.hydramc.GameStats;
+import net.hydramc.listeners.RegisterListeners;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,6 +19,7 @@ public class Domination extends JavaPlugin {
     @Override
     public void onDisable() {
         this.game.setGameStats(GameStats.CLOSING);
+        RegisterListeners.register();
         getLogger().info("[Domination] Off");
     }
 
