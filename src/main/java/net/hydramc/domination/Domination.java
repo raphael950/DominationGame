@@ -1,20 +1,25 @@
 package net.hydramc.domination;
 
-import net.hydramc.domination.handlers.GameState;
+import net.hydramc.GameStats;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Domination extends JavaPlugin {
 
+    private Game game;
+
     @Override
     public void onEnable() {
         getLogger().info("[Domination] On");
-        GameState.setState(GameState.WAITTING);
+        game = new Game();
     }
 
     @Override
     public void onDisable() {
-        GameState.setState(GameState.OFF);
+        this.game.setGameStats(GameStats.CLOSING);
         getLogger().info("[Domination] Off");
     }
 
+    public Game getGame() {
+        return this.game;
+    }
 }
