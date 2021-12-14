@@ -1,4 +1,4 @@
-package net.hydramc.listeners;
+package net.hydramc.domination.listeners;
 
 import fr.mrcubee.finder.plugin.PluginFinder;
 import org.bukkit.Bukkit;

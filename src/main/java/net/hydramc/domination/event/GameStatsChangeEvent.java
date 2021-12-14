@@ -1,4 +1,4 @@
-package net.hydramc.event;
+package net.hydramc.domination.event;
 
 import net.hydramc.GameStats;
 import org.bukkit.event.Event;

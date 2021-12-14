@@ -3,7 +3,7 @@ package net.hydramc.domination;
 import fr.mrcubee.annotation.spigot.config.ConfigAnnotation;
 import fr.mrcubee.finder.plugin.PluginFinder;
 import net.hydramc.GameStats;
-import net.hydramc.event.GameStatsChangeEvent;
+import net.hydramc.domination.event.GameStatsChangeEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
