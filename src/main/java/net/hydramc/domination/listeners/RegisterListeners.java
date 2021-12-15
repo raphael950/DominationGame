@@ -1,6 +1,7 @@
 package net.hydramc.domination.listeners;
 
 import fr.mrcubee.finder.plugin.PluginFinder;
+import net.hydramc.domination.listeners.player.*;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -17,6 +18,8 @@ public class RegisterListeners {
             return;
         pluginManager = Bukkit.getPluginManager();
         listeners = new Listener[] {
+                new PlayerJoinListener(),
+                new PlayerQuitListener(),
                 new PlayerListeners()
                 // Put all listeners's instance.
         };
