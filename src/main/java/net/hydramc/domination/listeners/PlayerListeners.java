@@ -20,6 +20,7 @@ public class PlayerListeners implements Listener {
         Player player = event.getPlayer();
         switch(Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
             case WAITING:
+                player.getInventory().setHeldItemSlot(0);
                 ActionBar.sendGlobalActionBar("game.waitting.join_action_bar", player.getName());
                 Utils.giveJoinItems(player);
                 break;
@@ -54,7 +55,8 @@ public class PlayerListeners implements Listener {
             case BANNER:
                 new TeamSelector().open(player);
                 break;
-
+            default:
+                break;
         }
     }
 
