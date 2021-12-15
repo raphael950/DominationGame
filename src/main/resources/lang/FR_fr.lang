@@ -1,5 +1,16 @@
 game.waitting.join_action_bar=&f%s &7a rejoint ! &8(&a1&8/&a30&8)
 game.waitting.leave_action_bar=&f%s &7a quitté ! &8(&c1&8/&c30&8)
+
 game.waiting.item.team_selector=&aEquipe &8| &7Clic droit
-game.waiting.item.kit_selector=&bClasse &8| &7Clic droit
+game.waiting.item.kit_selector=&bClasses &8| &7Clic droit
 game.waiting.item.lobby_item=&cQuitter &8| &7Clic droit
+
+game.waiting.gui.title=&8» &7Equipes
+
+game.waiting.gui.random=&7Aléatoire
+game.waiting.gui.blue=&3Bleue
+game.waiting.gui.red=&cRouge
+
+game.waiting.gui.random.click=&8» &7Une équipe aléatoire sera sélectionnée.
+game.waiting.gui.blue.click=&8» &7L'équipe &3bleue &7a été sélectionnée.
+game.waiting.gui.red.click=&8» &7L'équipe &crouge &7a été sélectionnée.

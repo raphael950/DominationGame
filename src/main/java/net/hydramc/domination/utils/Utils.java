@@ -3,6 +3,7 @@ package net.hydramc.domination.utils;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import fr.mrcubee.langlib.Lang;
+import fr.mrmicky.fastinv.ItemBuilder;
 import net.hydramc.domination.Domination;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,11 +17,11 @@ public class Utils {
         Inventory inventory = player.getInventory();
 
         ItemStack teamSelector = new ItemBuilder(Material.BANNER)
-                .setName(Lang.getMessage(player, "game.waiting.item.team_selector", "ERROR", true))
-                .toItemStack();
+                .name(Lang.getMessage(player, "game.waiting.item.team_selector", "ERROR", true))
+                .build();
         ItemStack lobbyItem = new ItemBuilder(Material.BED)
-                .setName(Lang.getMessage(player, "game.waiting.item.lobby_item", "ERROR", true))
-                .toItemStack();
+                .name(Lang.getMessage(player, "game.waiting.item.lobby_item", "ERROR", true))
+                .build();
 
         inventory.setItem(0, teamSelector);
         inventory.setItem(8, lobbyItem);
