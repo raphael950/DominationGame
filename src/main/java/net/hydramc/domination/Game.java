@@ -10,15 +10,19 @@ import org.bukkit.plugin.Plugin;
 public class Game {
 
     private final GameSetting gameSetting;
+    private final Timer timer;
     private GameStats gameStats;
 
     public Game() {
         final Plugin plugin = (Plugin) PluginFinder.INSTANCE.findPluginCaller();
 
-        this.gameSetting = new GameSetting();
-        if (plugin != null)
-            ConfigAnnotation.loadClass(plugin.getConfig(), gameSetting);
         this.gameStats = GameStats.OPENING;
+        this.gameSetting = new GameSetting();
+        this.timer = new Timer(this);
+        if (plugin != null) {
+            ConfigAnnotation.loadClass(plugin.getConfig(), gameSetting);
+            this.timer.runTaskTimer(plugin, 0L, 10L);
+        }
     }
 
     public GameSetting getGameSetting() {
