@@ -1,6 +1,7 @@
 package net.hydramc.domination;
 
 import fr.mrcubee.finder.plugin.PluginFinder;
+import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.FastInvManager;
 import net.hydramc.GameStats;
 import net.hydramc.domination.listeners.RegisterListeners;
@@ -13,11 +14,13 @@ public class Domination extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        game = new Game();
+        Lang.setDefaultLang("FR_fr");
+        this.game = new Game();
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         FastInvManager.register(this);
         RegisterListeners.register();
         getLogger().info("On");
+        this.game.setGameStats(GameStats.WAITING);
     }
 
     @Override
