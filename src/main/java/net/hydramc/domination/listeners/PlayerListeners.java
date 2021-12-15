@@ -55,8 +55,6 @@ public class PlayerListeners implements Listener {
             case BANNER:
                 new TeamSelector().open(player);
                 break;
-            default:
-                break;
         }
     }
 

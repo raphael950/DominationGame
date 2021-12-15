@@ -7,11 +7,12 @@ import net.hydramc.domination.GameSetting;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinListener implements Listener {
 
     @EventHandler
-    public void event(PlayerJoinListener event) {
+    public void event(PlayerJoinEvent event) {
         final Game game = Domination.getGameInstance();
         final GameSetting gameSetting;
 

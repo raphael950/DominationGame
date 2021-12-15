@@ -15,7 +15,7 @@ public class TeamSelector extends FastInv {
 
     public TeamSelector() {
 
-        super(8, Lang.getMessage("game.waiting.gui.title", "ERROR", true));
+        super(9, Lang.getMessage("game.waiting.gui.title", "ERROR", true));
 
         // random team item
         ItemStack head = Head.getCustomTextureHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzk3OTU1NDYyZTRlNTc2NjY0NDk5YWM0YTFjNTcyZjYxNDNmMTlhZDJkNjE5NDc3NjE5OGY4ZDEzNmZkYjIifX19");
