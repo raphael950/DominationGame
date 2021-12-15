@@ -48,6 +48,9 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
+        if (event.getItem().getType() == null) {
+            return;
+        }
         switch (event.getItem().getType()) {
             case BED:
                 Utils.sendToLobby(player);
