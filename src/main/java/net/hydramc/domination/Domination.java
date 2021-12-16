@@ -5,6 +5,9 @@ import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.FastInvManager;
 import net.hydramc.GameStats;
 import net.hydramc.domination.listeners.RegisterListeners;
+import net.hydramc.domination.utils.Utils;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,6 +29,10 @@ public class Domination extends JavaPlugin {
 
         getLogger().info("On");
         this.game.setGameStats(GameStats.WAITING);
+
+        for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+            Utils.spawn(player.getPlayer());
+        }
 
     }
 

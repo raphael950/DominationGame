@@ -8,9 +8,9 @@ game.waiting.item.lobby_item=&cQuitter &8| &7Clic droit
 game.waiting.gui.title=&8» &7Equipes
 
 game.waiting.gui.random=&7Aléatoire
-game.waiting.gui.blue=&3Bleue
+game.waiting.gui.blue=&9Bleue
 game.waiting.gui.red=&cRouge
 
 game.waiting.gui.random.click=&8» &7Une équipe aléatoire sera sélectionnée.
-game.waiting.gui.blue.click=&8» &7L'équipe &3bleue &7a été sélectionnée.
+game.waiting.gui.blue.click=&8» &7L'équipe &9bleue &7a été sélectionnée.
 game.waiting.gui.red.click=&8» &7L'équipe &crouge &7a été sélectionnée.

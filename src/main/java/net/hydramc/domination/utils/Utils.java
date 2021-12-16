@@ -22,14 +22,13 @@ public class Utils {
     }
 
     public static void giveJoinItems(Player player) {
+
         player.getInventory().setHeldItemSlot(0);
 
         Inventory inventory = player.getInventory();
         inventory.clear();
 
-        ItemStack teamSelector = new ItemBuilder(Material.BANNER)
-                .name(Lang.getMessage(player, "game.waiting.item.team_selector", "ERROR", true))
-                .build();
+        ItemStack teamSelector = Banner.white(player);
         ItemStack lobbyItem = new ItemBuilder(Material.BED)
                 .name(Lang.getMessage(player, "game.waiting.item.lobby_item", "ERROR", true))
                 .build();
@@ -49,5 +48,6 @@ public class Utils {
         out.writeUTF("lobby");
         player.sendPluginMessage(Domination.getInstance(), "BungeeCord", out.toByteArray());
     }
+
 
 }
