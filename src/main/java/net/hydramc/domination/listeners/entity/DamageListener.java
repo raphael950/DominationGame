@@ -1,7 +1,8 @@
 package net.hydramc.domination.listeners.entity;
 
-import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -13,8 +14,20 @@ public class DamageListener implements Listener {
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
 
-        if (!(Objects.requireNonNull(Domination.getGameInstance()).getGameStats().equals(GameStats.DURING))) {
-            event.setCancelled(true);
+        switch (Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
+
+            case WAITING:
+                event.setCancelled(true);
+            case DURING:
+                if (!(event.getEntityType() == EntityType.PLAYER)) {
+                    return;
+                }
+                double damageValue = event.getFinalDamage();
+                Player player = (Player) event.getEntity();
+                if (damageValue >= player.getHealth()) {
+                    // cancel event and "kill" the player
+                }
+
         }
 
     }

@@ -6,5 +6,11 @@ game.waiting.item.kit_selector=&bKits &8| &7Right click
 game.waiting.item.lobby_item=&cLeave &8| &7Right click
 
 game.waiting.gui.title=&8» &7Teams
+
 game.waiting.gui.random=&7Random
+game.waiting.gui.blue=&3Blue
+game.waiting.gui.red=&cRed
+
 game.waiting.gui.random.clicked=&8» &7A random team will be selected.
+game.waiting.gui.blue.click=&8» &7The &3blue &7team has been selected.
+game.waiting.gui.red.click=&8» &7The &cred &7team has been selected.
