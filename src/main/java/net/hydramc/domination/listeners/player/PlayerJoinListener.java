@@ -7,7 +7,6 @@ import net.hydramc.domination.GameSetting;
 import net.hydramc.domination.utils.ActionBar;
 import net.hydramc.domination.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,13 +29,11 @@ public class PlayerJoinListener implements Listener {
             game.setGameStats(GameStats.STARTING);
 
         Player player = event.getPlayer();
+
         switch (Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
             case WAITING:
-                player.setGameMode(GameMode.ADVENTURE);
-                player.getInventory().setHeldItemSlot(0);
-
+                Utils.spawn(player);
                 ActionBar.sendGlobalActionBar("game.waitting.join_action_bar", player.getName());
-                Utils.giveJoinItems(player);
                 break;
 
             case DURING:

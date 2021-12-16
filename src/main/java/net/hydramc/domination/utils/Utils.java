@@ -5,16 +5,27 @@ import com.google.common.io.ByteStreams;
 import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.ItemBuilder;
 import net.hydramc.domination.Domination;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class Utils {
 
+    public static void spawn(Player player) {
+        player.setGameMode(GameMode.ADVENTURE);
+        player.setHealth(20);
+        player.setExp(0);
+        player.setLevel(0);
+        teleportToSpawn(player);
+        giveJoinItems(player);
+    }
+
     public static void giveJoinItems(Player player) {
+        player.getInventory().setHeldItemSlot(0);
+
         Inventory inventory = player.getInventory();
+        inventory.clear();
 
         ItemStack teamSelector = new ItemBuilder(Material.BANNER)
                 .name(Lang.getMessage(player, "game.waiting.item.team_selector", "ERROR", true))
@@ -28,8 +39,8 @@ public class Utils {
     }
 
     public static void teleportToSpawn(Player player) {
-        Location loc = player.getLocation().getWorld().getSpawnLocation();
-        player.teleport(loc);
+        World lobby = Bukkit.getWorld("world");
+        player.teleport(lobby.getSpawnLocation());
     }
 
     public static void sendToLobby(Player player) {

@@ -17,7 +17,10 @@ public class DamageListener implements Listener {
         switch (Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
 
             case WAITING:
-                event.setCancelled(true);
+                if (event.getEntity().getType() == EntityType.PLAYER) {
+                    event.setCancelled(true);
+                }
+
             case DURING:
                 if (!(event.getEntityType() == EntityType.PLAYER)) {
                     return;
