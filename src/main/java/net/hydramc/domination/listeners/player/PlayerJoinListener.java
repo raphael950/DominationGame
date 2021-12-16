@@ -4,15 +4,21 @@ import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.Game;
 import net.hydramc.domination.GameSetting;
+import net.hydramc.domination.utils.ActionBar;
+import net.hydramc.domination.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+
+import java.util.Objects;
 
 public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void event(PlayerJoinEvent event) {
+
         final Game game = Domination.getGameInstance();
         final GameSetting gameSetting;
 
@@ -21,6 +27,21 @@ public class PlayerJoinListener implements Listener {
         gameSetting = game.getGameSetting();
         if (Bukkit.getOnlinePlayers().size() >= gameSetting.getMinPlayer())
             game.setGameStats(GameStats.STARTING);
+
+        Player player = event.getPlayer();
+        switch (Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
+            case WAITING:
+                player.getInventory().setHeldItemSlot(0);
+                ActionBar.sendGlobalActionBar("game.waitting.join_action_bar", player.getName());
+                Utils.giveJoinItems(player);
+                break;
+
+            case DURING:
+                // spec
+                break;
+
+        }
+
     }
 
 }
