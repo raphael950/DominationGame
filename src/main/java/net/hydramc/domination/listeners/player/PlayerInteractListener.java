@@ -22,16 +22,15 @@ public class PlayerInteractListener implements Listener {
 
         Player player = event.getPlayer();
 
-        if (event.getItem() == null) {
+        if (event.getItem() == null)
             return;
-        }
 
         switch (event.getItem().getType()) {
             case BED:
                 Utils.sendToLobby(player);
                 break;
             case BANNER:
-                new TeamSelector().open(player);
+                new TeamSelector(player).open(player);
                 break;
         }
 

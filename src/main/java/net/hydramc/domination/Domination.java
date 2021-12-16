@@ -5,6 +5,7 @@ import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.FastInvManager;
 import net.hydramc.GameStats;
 import net.hydramc.domination.listeners.RegisterListeners;
+import net.hydramc.domination.utils.Cooldown;
 import net.hydramc.domination.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -20,6 +21,8 @@ public class Domination extends JavaPlugin {
 
         this.game = new Game();
         this.game.setGameStats(GameStats.OPENING);
+
+        Cooldown.setupCooldown();
 
         Lang.setDefaultLang("FR_fr");
 

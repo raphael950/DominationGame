@@ -7,6 +7,8 @@ game.waiting.item.lobby_item=&cQuitter §8§l｜ &7Clic-droit
 
 game.waiting.gui.title=&8» &7Equipes
 
+gui.cooldown=&7Veuillez patienter &c1 seconde &7avant de cliquer à nouveau !
+
 game.waiting.gui.random=&7Aléatoire
 game.waiting.gui.blue=&9Bleue
 game.waiting.gui.red=&cRouge

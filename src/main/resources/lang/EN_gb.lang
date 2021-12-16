@@ -7,6 +7,8 @@ game.waiting.item.lobby_item=&cLeave §8§l｜ &7Right click
 
 game.waiting.gui.title=&8» &7Teams
 
+gui.cooldown=&7Please wait &c1 second &7before clicking again!
+
 game.waiting.gui.random=&7Random
 game.waiting.gui.blue=&9Blue
 game.waiting.gui.red=&cRed
