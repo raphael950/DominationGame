@@ -4,12 +4,14 @@ import fr.mrcubee.annotation.spigot.config.ConfigAnnotation;
 import fr.mrcubee.finder.plugin.PluginFinder;
 import net.hydramc.GameStats;
 import net.hydramc.domination.event.GameStatsChangeEvent;
+import net.hydramc.domination.scoreboard.ScoreboardManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 public class Game {
 
     private final GameSetting gameSetting;
+    private final ScoreboardManager scoreboardManager;
     private final Timer timer;
     private GameStats gameStats;
 
@@ -18,6 +20,7 @@ public class Game {
 
         this.gameStats = GameStats.OPENING;
         this.gameSetting = new GameSetting();
+        this.scoreboardManager = new ScoreboardManager();
         this.timer = new Timer(this);
         if (plugin != null) {
             ConfigAnnotation.loadClass(plugin.getConfig(), gameSetting);
@@ -27,6 +30,10 @@ public class Game {
 
     public GameSetting getGameSetting() {
         return this.gameSetting;
+    }
+
+    public ScoreboardManager getScoreboardManager() {
+        return this.scoreboardManager;
     }
 
     public void setGameStats(GameStats newStats) {
@@ -40,4 +47,5 @@ public class Game {
     public GameStats getGameStats() {
         return this.gameStats;
     }
+
 }

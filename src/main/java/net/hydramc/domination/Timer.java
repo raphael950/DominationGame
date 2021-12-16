@@ -1,6 +1,7 @@
 package net.hydramc.domination;
 
 import net.hydramc.GameStats;
+import net.hydramc.domination.scoreboard.ScoreboardManager;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Timer extends BukkitRunnable {
@@ -14,11 +15,16 @@ public class Timer extends BukkitRunnable {
     @Override
     public void run() {
         final GameStats gameStats = game.getGameStats();
+        final ScoreboardManager scoreboardManager = game.getScoreboardManager();
 
         if (gameStats == GameStats.STOPPING) {
             cancel();
             return;
         }
-        // TODO: Insert timer code here.
+        scoreboardManager.updateAllPlayers();
+        if (gameStats.ordinal() < 2 || gameStats.ordinal() > 3)
+            return;
+        // TODO: Update kit's effects.
     }
+
 }
