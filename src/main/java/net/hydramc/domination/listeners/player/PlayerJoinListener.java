@@ -7,6 +7,7 @@ import net.hydramc.domination.GameSetting;
 import net.hydramc.domination.utils.ActionBar;
 import net.hydramc.domination.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +19,7 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void event(PlayerJoinEvent event) {
+        event.setJoinMessage("");
 
         final Game game = Domination.getGameInstance();
         final GameSetting gameSetting;
@@ -33,11 +35,12 @@ public class PlayerJoinListener implements Listener {
         switch (Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
             case WAITING:
                 Utils.spawn(player);
-                ActionBar.sendGlobalActionBar("game.waitting.join_action_bar", player.getName());
+                ActionBar.sendGlobalActionBar("game.waitting.join_action_bar", player.getName(), Bukkit.getOnlinePlayers().size());
                 break;
 
             case DURING:
-                // spec
+                // TODO: Make the player spectating the game
+                player.setGameMode(GameMode.SPECTATOR);
                 break;
 
         }

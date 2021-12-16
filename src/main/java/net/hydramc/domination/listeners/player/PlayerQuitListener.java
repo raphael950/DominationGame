@@ -17,6 +17,7 @@ public class PlayerQuitListener implements Listener {
 
     @EventHandler
     public void event(PlayerQuitEvent event) {
+        event.setQuitMessage("");
 
         final Game game = Domination.getGameInstance();
         final GameSetting gameSetting;
@@ -30,7 +31,7 @@ public class PlayerQuitListener implements Listener {
         Player player = event.getPlayer();
         switch(Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
             case WAITING:
-                ActionBar.sendGlobalActionBar("game.waitting.leave_action_bar", player.getName());
+                ActionBar.sendGlobalActionBar("game.waitting.leave_action_bar", player.getName(), Bukkit.getOnlinePlayers().size());
                 break;
 
             case DURING:
