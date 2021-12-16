@@ -42,16 +42,16 @@ public class TeamSelector extends FastInv {
 
     @Override
     public void onOpen(InventoryOpenEvent event) {
-        event.getPlayer().sendMessage(ChatColor.GOLD + "You opened the inventory");
+        // do something
     }
 
     @Override
     public void onClose(InventoryCloseEvent event) {
-        event.getPlayer().sendMessage(ChatColor.GOLD + "You closed the inventory");
+        // do something
     }
 
     @Override
     public void onClick(InventoryClickEvent event) {
-        // do something
+        // click cooldown
     }
 }

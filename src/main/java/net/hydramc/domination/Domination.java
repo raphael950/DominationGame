@@ -14,19 +14,27 @@ public class Domination extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Lang.setDefaultLang("FR_fr");
+
         this.game = new Game();
+        this.game.setGameStats(GameStats.OPENING);
+
+        Lang.setDefaultLang("FR_fr");
+
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         FastInvManager.register(this);
         RegisterListeners.register();
+
         getLogger().info("On");
         this.game.setGameStats(GameStats.WAITING);
+
     }
 
     @Override
     public void onDisable() {
+
         this.game.setGameStats(GameStats.CLOSING);
         getLogger().info("Off");
+
     }
 
     public Game getGame() {
