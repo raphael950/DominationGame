@@ -2,6 +2,7 @@ package net.hydramc.domination.listeners;
 
 import fr.mrcubee.finder.plugin.PluginFinder;
 import net.hydramc.domination.listeners.entity.DamageListener;
+import net.hydramc.domination.listeners.game.GameStatsChangeListener;
 import net.hydramc.domination.listeners.player.*;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -21,12 +22,14 @@ public class RegisterListeners {
         listeners = new Listener[] {
                 // Put all listener's instance.
 
-                new PlayerJoinListener(),
-                new PlayerQuitListener(),
-                new PlayerBlockListener(),
-                new PlayerInteractListener(),
-
                 new DamageListener(),
+
+                new GameStatsChangeListener(),
+
+                new PlayerInteractListener(),
+                new PlayerBlockListener(),
+                new PlayerJoinListener(),
+                new PlayerQuitListener()
         };
         for (Listener listener : listeners)
             pluginManager.registerEvents(listener, plugin);
