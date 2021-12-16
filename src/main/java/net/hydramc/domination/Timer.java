@@ -17,7 +17,7 @@ public class Timer extends BukkitRunnable {
         final GameStats gameStats = game.getGameStats();
         final ScoreboardManager scoreboardManager = game.getScoreboardManager();
 
-        if (gameStats == GameStats.STOPPING) {
+        if (gameStats == GameStats.CLOSING) {
             cancel();
             return;
         }
