@@ -2,12 +2,16 @@ package net.hydramc.domination;
 
 import fr.mrcubee.annotation.spigot.config.ConfigAnnotation;
 import fr.mrcubee.finder.plugin.PluginFinder;
+import fr.mrcubee.weak.WeakHashSet;
 import net.hydramc.GameStats;
 import net.hydramc.domination.event.GameStatsChangeEvent;
 import net.hydramc.domination.scoreboard.ScoreboardManager;
 import net.hydramc.domination.step.StepManager;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+
+import java.util.Set;
 
 public class Game {
 
@@ -15,6 +19,7 @@ public class Game {
     private final ScoreboardManager scoreboardManager;
     private final StepManager stepManager;
     private final Timer timer;
+    private final Set<Player> players;
     private GameStats gameStats;
 
     public Game() {
@@ -25,6 +30,7 @@ public class Game {
         this.scoreboardManager = new ScoreboardManager();
         this.stepManager = new StepManager(this);
         this.timer = new Timer(this);
+        this.players = new WeakHashSet<Player>();
         if (plugin != null) {
             ConfigAnnotation.loadClass(plugin.getConfig(), gameSetting);
             this.timer.runTaskTimer(plugin, 0L, 10L);
@@ -55,4 +61,7 @@ public class Game {
         return this.gameStats;
     }
 
+    public Set<Player> getPlayers() {
+        return this.players;
+    }
 }
