@@ -24,6 +24,7 @@ public class DamageListener implements Listener {
 
             case WAITING:
                 event.setCancelled(true);
+                break;
 
             case DURING:
                 event.setDamage(0);
@@ -35,6 +36,7 @@ public class DamageListener implements Listener {
                     Entity attacker = event.getDamager();
                     Utils.death(player, attacker);
                 }
+                break;
 
         }
 
