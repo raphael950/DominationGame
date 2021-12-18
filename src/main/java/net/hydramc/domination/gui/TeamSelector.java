@@ -64,7 +64,7 @@ public class TeamSelector extends FastInv {
             ActionBar.sendPlayerActionBar(player, Lang.getMessage("gui.cooldown", "ERROR", true));
             return false;
         }
-        Cooldown.setCooldown(player, 2);
+        Cooldown.setCooldown(player, 1);
         return true;
     }
 

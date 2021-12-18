@@ -27,6 +27,7 @@ public class RegisterListeners {
                 new GameStatsChangeListener(),
 
                 new PlayerBlockListener(),
+                new PlayerDropItemListener(),
                 new PlayerFoodLevelListener(),
                 new PlayerInteractListener(),
                 new PlayerJoinListener(),

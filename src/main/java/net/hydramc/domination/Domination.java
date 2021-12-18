@@ -4,6 +4,7 @@ import fr.mrcubee.finder.plugin.PluginFinder;
 import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.FastInvManager;
 import net.hydramc.GameStats;
+import net.hydramc.domination.commands.Spawn;
 import net.hydramc.domination.listeners.RegisterListeners;
 import net.hydramc.domination.utils.Cooldown;
 import net.hydramc.domination.utils.Utils;
@@ -29,6 +30,8 @@ public class Domination extends JavaPlugin {
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         FastInvManager.register(this);
         RegisterListeners.register();
+
+        this.getCommand("spawn").setExecutor(new Spawn());
 
         getLogger().info("On");
         this.game.setGameStats(GameStats.WAITING);

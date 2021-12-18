@@ -3,3 +3,6 @@ version: 1.0
 api-version: 1.8
 authors: [Twiz0x_x, MrCubee]
 main: net.hydramc.domination.Domination
+commands:
+  spawn:
+    description: "Teleport player to spawn"
