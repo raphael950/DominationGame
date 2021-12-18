@@ -3,6 +3,10 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
 group 'net.hydramc'
 version '1.0'
 
@@ -28,3 +32,5 @@ shadowJar {
 test {
     useJUnitPlatform()
 }
+
+libsDirName = 'C:\\Users\\Raphaël\\Desktop'

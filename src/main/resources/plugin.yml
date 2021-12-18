@@ -6,3 +6,11 @@ main: net.hydramc.domination.Domination
 commands:
   spawn:
     description: "Teleport player to spawn"
+  dm:
+    aliases: [domination]
+    usage: "§8§m--------------------------------§r
+      \n                  §f§lDOMINATION  §r\n\n
+      §8» §b/dm setlobby: §7Placer la location du lobby d'attente  \n
+      §8» §b/dm status: §7Obtenir le status de la partie  \n
+      §8» §b/dm set: §7Placer une position du jeu  \n
+      §8§m--------------------------------"

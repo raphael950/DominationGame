@@ -11,7 +11,7 @@ public class Spawn implements CommandExecutor {
         if (sender instanceof Player) {
             Utils.teleportToSpawn((Player) sender);
         }
-        return false;
+        return true;
     }
 
 }

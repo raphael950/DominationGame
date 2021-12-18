@@ -6,9 +6,11 @@ import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.ItemBuilder;
 import net.hydramc.domination.Domination;
 import org.bukkit.*;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 
 public class Utils {
 
@@ -38,8 +40,12 @@ public class Utils {
     }
 
     public static void teleportToSpawn(Player player) {
-        World lobby = Bukkit.getWorld("world");
-        player.teleport(lobby.getSpawnLocation());
+        Plugin plugin = Domination.getInstance();
+        assert plugin != null;
+
+        Location location = (Location) plugin.getConfig().get("lobby-location");
+
+        player.teleport(location);
     }
 
     public static void sendToLobby(Player player) {
@@ -47,6 +53,13 @@ public class Utils {
         out.writeUTF("Connect");
         out.writeUTF("lobby");
         player.sendPluginMessage(Domination.getInstance(), "BungeeCord", out.toByteArray());
+    }
+
+    public static void death(Player player, Entity... attacker) {
+
+        player.setGameMode(GameMode.SPECTATOR);
+
+
     }
 
 
