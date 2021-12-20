@@ -1,88 +1,81 @@
 package net.hydramc.domination.commands;
 
+import fr.mrcubee.langlib.Lang;
 import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
-import org.bukkit.Location;
+import net.hydramc.domination.Game;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
-import java.util.Objects;
+import java.lang.reflect.Method;
 
 public class Dm implements CommandExecutor {
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            return false;
-        }
 
-        Player player = (Player)(sender);
-        if (!player.hasPermission("group.admin")) {
-            return false;
-        }
-
-        int argLenght = args.length;
-
-        if (argLenght == 0) {
-            return false;
-        }
-
-        if (argLenght == 1) {
-
-            Plugin plugin = Domination.getInstance();
-            assert plugin != null;
-            Location location = player.getLocation();
-
-            switch (args[0]) {
-
-                case "setlobby":
-
-                    plugin.getConfig().set("lobby-location", location);
-                    plugin.saveConfig();
-                    player.sendMessage("§8» §7La location du §elobby d'attente §7a été changé.");
-                    return true;
-
-                case "set":
-
-                    player.sendMessage("§8/dm set §7[location name]");
-                    return true;
-
-                case "status":
-
-                    String gameStats = String.valueOf(Objects.requireNonNull(Domination.getGameInstance()).getGameStats());
-                    player.sendMessage("§8» §7Etat de la partie: §6" + gameStats);
-                    return true;
-
-                case "start":
-
-                    if (Domination.getGameInstance().getGameStats() == GameStats.DURING) {
-                        player.sendMessage("§8» §cLa partie est déjà en cours");
-                        return true;
-                    }
-
-                    Domination.getGameInstance().setGameStats(GameStats.DURING);
-                    player.sendMessage("§8» §7La partie a été lancée");
-                    return true;
-
-                case "stop":
-
-                    if (!(Domination.getGameInstance().getGameStats() == GameStats.DURING)) {
-                        player.sendMessage("§8» §cLa partie n'est pas en cours");
-                        return true;
-                    }
-
-                    // TODO
-                    // player.sendMessage("§8» §7La partie a été définie sur §6WAITING");
-                    player.sendMessage("§8» §7Pas encore mis en place");
-                    return true;
-
-            }
-
-        }
-
-        return false;
-
+    private boolean setlobby(Domination plugin, Game game, Player sender, String[] args) {
+        plugin.getConfig().set("lobby-location", sender.getLocation());
+        sender.sendMessage(Lang.getMessage(sender, "command.dm.setlobby", "§8» §7La location du §elobby d'attente §7a été changé.", true));
+        return true;
     }
 
+    private boolean set(Domination plugin, Game game, Player sender, String[] args) {
+        sender.sendMessage(Lang.getMessage(sender, "command.dm.set", "§8/dm set §7[location name]", true));
+        return true;
+    }
+
+    private boolean status(Domination plugin, Game game, Player sender, String[] args) {
+        sender.sendMessage(Lang.getMessage(sender,"", "§8» §7Etat de la partie: §6%s", true, game.getGameStats()));
+        return true;
+    }
+
+    private boolean start(Domination plugin, Game game, Player sender, String[] args) {
+        if (game.getGameStats().ordinal() < 2)
+            sender.sendMessage(Lang.getMessage("", "§8» §cLa partie est déjà en cours", true));
+        else if (game.setGameStats(GameStats.STARTING))
+            sender.sendMessage(Lang.getMessage(sender, "", "§8» §7La partie a été lancée", true));
+        else
+            sender.sendMessage(Lang.getMessage(sender, "", "", true));
+        return true;
+    }
+
+    private boolean stop(Domination plugin, Game game, Player sender, String[] args) {
+        if (game.getGameStats().ordinal() > 3)
+            sender.sendMessage(Lang.getMessage(sender, "", "§8» §cLa partie n'est pas en cours", true));
+        else if (game.setGameStats(GameStats.STOPPING))
+            sender.sendMessage(Lang.getMessage(sender, "", "", true));
+        else
+            sender.sendMessage(Lang.getMessage(sender, "", "", true));
+        return true;
+    }
+
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        final Domination plugin = Domination.getInstance();
+        final Game game;
+        final Player player;
+        final String[] subCommandArgs;
+        Method subCommandMethod = null;
+        Object subCommandResult = null;
+
+        if (plugin == null || !(sender instanceof Player) || sender.hasPermission("group.admin") || args.length < 1)
+            return false;
+        game = plugin.getGame();
+        player = (Player) sender;
+        subCommandArgs = new String[args.length - 1];
+        System.arraycopy(args, 1, subCommandArgs, 0, subCommandArgs.length);
+        try {
+            subCommandMethod = Domination.class.getMethod(args[0].toLowerCase(), Domination.class, Game.class, Player.class, String[].class);
+        } catch (NoSuchMethodException ignored) {}
+        if (subCommandMethod == null)
+            return false;
+        subCommandMethod.setAccessible(true);
+        try {
+            subCommandResult = subCommandMethod.invoke(this, player, game, player, subCommandArgs);
+        } catch (Exception exception) {
+            player.sendMessage("JVM SubCommand Method Error: " + exception.getMessage());
+        }
+        if (subCommandResult instanceof Boolean)
+            return (boolean) subCommandResult;
+        return false;
+    }
 }
