@@ -57,20 +57,20 @@ public class Dm implements CommandExecutor {
         Method subCommandMethod = null;
         Object subCommandResult = null;
 
-        if (plugin == null || !(sender instanceof Player) || sender.hasPermission("group.admin") || args.length < 1)
+        if (plugin == null || !(sender instanceof Player) || !sender.hasPermission("group.admin") || args.length < 1)
             return false;
         game = plugin.getGame();
         player = (Player) sender;
         subCommandArgs = new String[args.length - 1];
         System.arraycopy(args, 1, subCommandArgs, 0, subCommandArgs.length);
         try {
-            subCommandMethod = Domination.class.getMethod(args[0].toLowerCase(), Domination.class, Game.class, Player.class, String[].class);
+            subCommandMethod = Dm.class.getDeclaredMethod(args[0].toLowerCase(), Domination.class, Game.class, Player.class, String[].class);
         } catch (NoSuchMethodException ignored) {}
         if (subCommandMethod == null)
             return false;
         subCommandMethod.setAccessible(true);
         try {
-            subCommandResult = subCommandMethod.invoke(this, player, game, player, subCommandArgs);
+            subCommandResult = subCommandMethod.invoke(this, Domination.getInstance(), game, player, subCommandArgs);
         } catch (Exception exception) {
             player.sendMessage("JVM SubCommand Method Error: " + exception.getMessage());
         }

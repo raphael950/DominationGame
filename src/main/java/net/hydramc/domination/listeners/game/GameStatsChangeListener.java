@@ -24,7 +24,6 @@ public class GameStatsChangeListener implements Listener {
                 }
                 String team = TeamManager.getTeam(player);
 
-
             }
         }
 
