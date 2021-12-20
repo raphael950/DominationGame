@@ -1,5 +1,6 @@
 package net.hydramc.domination.commands;
 
+import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -51,6 +52,29 @@ public class Dm implements CommandExecutor {
 
                     String gameStats = String.valueOf(Objects.requireNonNull(Domination.getGameInstance()).getGameStats());
                     player.sendMessage("§8» §7Etat de la partie: §6" + gameStats);
+                    return true;
+
+                case "start":
+
+                    if (Domination.getGameInstance().getGameStats() == GameStats.DURING) {
+                        player.sendMessage("§8» §cLa partie est déjà en cours");
+                        return true;
+                    }
+
+                    Domination.getGameInstance().setGameStats(GameStats.DURING);
+                    player.sendMessage("§8» §7La partie a été lancée");
+                    return true;
+
+                case "stop":
+
+                    if (!(Domination.getGameInstance().getGameStats() == GameStats.DURING)) {
+                        player.sendMessage("§8» §cLa partie n'est pas en cours");
+                        return true;
+                    }
+
+                    // TODO
+                    // player.sendMessage("§8» §7La partie a été définie sur §6WAITING");
+                    player.sendMessage("§8» §7Pas encore mis en place");
                     return true;
 
             }

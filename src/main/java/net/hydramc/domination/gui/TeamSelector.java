@@ -3,6 +3,7 @@ package net.hydramc.domination.gui;
 import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
+import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.ActionBar;
 import net.hydramc.domination.utils.Banner;
 import net.hydramc.domination.utils.Cooldown;
@@ -26,6 +27,10 @@ public class TeamSelector extends FastInv {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.random.click", "ERROR", true));
                 player.getInventory().setItem(0, Banner.white(player));
+
+                if (TeamManager.hasTeam(player)) {
+                    TeamManager.removeTeam(player);
+                }
             }
 
         });
@@ -39,6 +44,8 @@ public class TeamSelector extends FastInv {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.blue.click", "ERROR", true));
                 player.getInventory().setItem(0, Banner.blue(player));
+                TeamManager.setTeam(player, "blue");
+                player.sendMessage(TeamManager.getTeam(player));
             }
 
         });
@@ -51,6 +58,8 @@ public class TeamSelector extends FastInv {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.red.click", "ERROR", true));
                 player.getInventory().setItem(0, Banner.red(player));
+                TeamManager.setTeam(player, "red");
+                player.sendMessage(TeamManager.getTeam(player));
             }
         });
 

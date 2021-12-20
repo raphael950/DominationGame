@@ -32,5 +32,3 @@ shadowJar {
 test {
     useJUnitPlatform()
 }
-
-libsDirName = 'C:\\Users\\Raphaël\\Desktop'
