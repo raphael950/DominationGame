@@ -49,12 +49,13 @@ public class Game {
         return this.stepManager;
     }
 
-    public void setGameStats(GameStats newStats) {
+    public boolean setGameStats(GameStats newStats) {
         if (newStats == null || this.gameStats == newStats
         || (this.gameStats.ordinal() >= 2 && this.gameStats.ordinal() > newStats.ordinal()))
-            return;
+            return false;
         Bukkit.getPluginManager().callEvent(new GameStatsChangeEvent(newStats));
         this.gameStats = newStats;
+        return true;
     }
 
     public GameStats getGameStats() {
