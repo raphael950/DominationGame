@@ -1,7 +1,6 @@
 package net.hydramc.domination.listeners.game;
 
 import net.hydramc.GameStats;
-import net.hydramc.domination.Domination;
 import net.hydramc.domination.event.GameStatsChangeEvent;
 import net.hydramc.domination.team.TeamManager;
 import org.bukkit.Bukkit;

@@ -31,21 +31,21 @@ public class Dm implements CommandExecutor {
 
     private boolean start(Domination plugin, Game game, Player sender, String[] args) {
         if (game.getGameStats().ordinal() < 2)
-            sender.sendMessage(Lang.getMessage("", "§8» §cLa partie est déjà en cours", true));
+            sender.sendMessage(Lang.getMessage("none", "§8» §cLa partie est déjà en cours", true));
         else if (game.setGameStats(GameStats.STARTING))
-            sender.sendMessage(Lang.getMessage(sender, "", "§8» §7La partie a été lancée", true));
+            sender.sendMessage(Lang.getMessage(sender, "none", "§8» §7La partie a été lancée", true));
         else
-            sender.sendMessage(Lang.getMessage(sender, "", "", true));
+            sender.sendMessage(Lang.getMessage(sender, "none", "§8» §cLa partie ne peut pas encore être lancée", true));
         return true;
     }
 
     private boolean stop(Domination plugin, Game game, Player sender, String[] args) {
         if (game.getGameStats().ordinal() > 3)
-            sender.sendMessage(Lang.getMessage(sender, "", "§8» §cLa partie n'est pas en cours", true));
+            sender.sendMessage(Lang.getMessage(sender, "none", "§8» §cLa partie n'est pas en cours", true));
         else if (game.setGameStats(GameStats.STOPPING))
-            sender.sendMessage(Lang.getMessage(sender, "", "", true));
+            sender.sendMessage(Lang.getMessage(sender, "none", "§8» §aLa partie a été arrêté", true));
         else
-            sender.sendMessage(Lang.getMessage(sender, "", "", true));
+            sender.sendMessage(Lang.getMessage(sender, "none", "§8» §cLa partie ne peut pas encore être arrêtée", true));
         return true;
     }
 
