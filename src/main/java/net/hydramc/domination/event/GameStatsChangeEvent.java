@@ -1,6 +1,7 @@
 package net.hydramc.domination.event;
 
 import net.hydramc.GameStats;
+import net.hydramc.domination.Domination;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
@@ -19,8 +20,7 @@ public class GameStatsChangeEvent extends Event {
     }
 
     public GameStats getCurrentGameStats() {
-        // TODO: Get game's current stats.
-        return null;
+        return Domination.getGameInstance().getGameStats();
     }
 
     @Override

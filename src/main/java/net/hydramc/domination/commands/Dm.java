@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class Dm implements CommandExecutor {
 
@@ -21,6 +22,8 @@ public class Dm implements CommandExecutor {
 
     private boolean set(Domination plugin, Game game, Player sender, String[] args) {
         sender.sendMessage(Lang.getMessage(sender, "command.dm.set", "§8/dm set §7[location name]", true));
+        // TODO: Set location of argument in config
+        sender.sendMessage(Arrays.toString(args));
         return true;
     }
 
