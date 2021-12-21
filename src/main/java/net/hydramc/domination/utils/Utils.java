@@ -5,12 +5,13 @@ import com.google.common.io.ByteStreams;
 import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.ItemBuilder;
 import net.hydramc.domination.Domination;
-import org.bukkit.*;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 
 public class Utils {
 
@@ -40,11 +41,7 @@ public class Utils {
     }
 
     public static void teleportToSpawn(Player player) {
-        Plugin plugin = Domination.getInstance();
-        assert plugin != null;
-
-        Location location = (Location) plugin.getConfig().get("lobby-location");
-
+        Location location = Locations.getLobby();
         player.teleport(location);
     }
 

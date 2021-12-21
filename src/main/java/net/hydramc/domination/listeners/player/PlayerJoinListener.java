@@ -2,8 +2,8 @@ package net.hydramc.domination.listeners.player;
 
 import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
-import net.hydramc.domination.Game;
-import net.hydramc.domination.GameSetting;
+import net.hydramc.domination.game.Game;
+import net.hydramc.domination.game.GameSetting;
 import net.hydramc.domination.scoreboard.ScoreboardBuilder;
 import net.hydramc.domination.utils.ActionBar;
 import net.hydramc.domination.utils.Utils;

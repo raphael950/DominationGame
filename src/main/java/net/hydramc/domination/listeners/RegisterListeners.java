@@ -4,6 +4,7 @@ import fr.mrcubee.finder.plugin.PluginFinder;
 import net.hydramc.domination.listeners.entity.DamageListener;
 import net.hydramc.domination.listeners.game.GameStatsChangeListener;
 import net.hydramc.domination.listeners.player.*;
+import net.hydramc.domination.listeners.world.WeatherListener;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -31,7 +32,9 @@ public class RegisterListeners {
                 new PlayerFoodLevelListener(),
                 new PlayerInteractListener(),
                 new PlayerJoinListener(),
-                new PlayerQuitListener()
+                new PlayerQuitListener(),
+
+                new WeatherListener()
         };
         for (Listener listener : listeners)
             pluginManager.registerEvents(listener, plugin);

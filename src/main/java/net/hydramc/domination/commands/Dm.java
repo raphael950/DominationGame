@@ -3,7 +3,8 @@ package net.hydramc.domination.commands;
 import fr.mrcubee.langlib.Lang;
 import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
-import net.hydramc.domination.Game;
+import net.hydramc.domination.game.Game;
+import net.hydramc.domination.utils.Config;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,7 +16,9 @@ import java.util.Arrays;
 public class Dm implements CommandExecutor {
 
     private boolean setlobby(Domination plugin, Game game, Player sender, String[] args) {
-        plugin.getConfig().set("lobby-location", sender.getLocation());
+        final Config config = Domination.getGameInstance().getLocationConfig();
+        config.getConfig().set("lobby", sender.getLocation());
+        config.save();
         sender.sendMessage(Lang.getMessage(sender, "command.dm.setlobby", "§8» §7La location du §elobby d'attente §7a été changé.", true));
         return true;
     }

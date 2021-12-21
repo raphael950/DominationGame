@@ -1,17 +1,17 @@
-package net.hydramc.domination;
+package net.hydramc.domination.game;
 
 import fr.mrcubee.annotation.spigot.config.Config;
 
 public class GameSetting {
 
     @Config(path = "world.name")
-    private String worldName = "world";
+    private final String worldName = "world";
 
     @Config(path = "player.min")
-    private int minPlayer = 10;
+    private final int minPlayer = 10;
 
     @Config(path = "player.max")
-    private int maxPlayer = 100;
+    private final int maxPlayer = 100;
 
 
     public String getWorldName() {

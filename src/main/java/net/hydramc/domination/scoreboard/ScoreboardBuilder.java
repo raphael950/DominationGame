@@ -2,7 +2,7 @@ package net.hydramc.domination.scoreboard;
 
 import fr.mrmicky.fastboard.FastBoard;
 import net.hydramc.domination.Domination;
-import net.hydramc.domination.Game;
+import net.hydramc.domination.game.Game;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

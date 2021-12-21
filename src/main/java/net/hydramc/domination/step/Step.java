@@ -1,10 +1,9 @@
 package net.hydramc.domination.step;
 
-import net.hydramc.domination.Game;
+import net.hydramc.domination.game.Game;
 import net.hydramc.domination.scoreboard.ScoreboardBuilder;
 import org.bukkit.entity.Player;
 
-import java.util.List;
 import java.util.Objects;
 
 public abstract class Step {

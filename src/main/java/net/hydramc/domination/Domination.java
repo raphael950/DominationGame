@@ -6,6 +6,7 @@ import fr.mrmicky.fastinv.FastInvManager;
 import net.hydramc.GameStats;
 import net.hydramc.domination.commands.Dm;
 import net.hydramc.domination.commands.Spawn;
+import net.hydramc.domination.game.Game;
 import net.hydramc.domination.listeners.RegisterListeners;
 import net.hydramc.domination.utils.Cooldown;
 import net.hydramc.domination.utils.Utils;

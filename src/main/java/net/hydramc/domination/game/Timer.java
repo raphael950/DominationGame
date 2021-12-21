@@ -1,4 +1,4 @@
-package net.hydramc.domination;
+package net.hydramc.domination.game;
 
 import net.hydramc.GameStats;
 import net.hydramc.domination.scoreboard.ScoreboardManager;
@@ -12,7 +12,7 @@ public class Timer extends BukkitRunnable {
 
     private final Game game;
 
-    protected Timer(Game game) {
+    public Timer(Game game) {
         this.game = game;
     }
 

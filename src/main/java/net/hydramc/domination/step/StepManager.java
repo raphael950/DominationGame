@@ -1,6 +1,6 @@
 package net.hydramc.domination.step;
 
-import net.hydramc.domination.Game;
+import net.hydramc.domination.game.Game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class StepManager {
 
     public StepManager(Game game) {
         this.game = game;
-        this.gameSteps = new ArrayList<Step>();
+        this.gameSteps = new ArrayList<>();
         this.currentStep = -1;
     }
 
