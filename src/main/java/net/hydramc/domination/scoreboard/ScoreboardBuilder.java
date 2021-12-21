@@ -1,15 +1,43 @@
 package net.hydramc.domination.scoreboard;
 
+import fr.mrmicky.fastboard.FastBoard;
 import net.hydramc.domination.Game;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class ScoreboardBuilder {
 
-    public static List<String> build(Player player, Game game) {
-        // TODO: Create scoreboard's sidebar line for a specific player.
-        return null;
+
+    private static final Map<Player, FastBoard> boards = new HashMap<>();
+
+    private static boolean isSetup(Player player) {
+        return boards.containsKey(player);
+    }
+
+    private static FastBoard getBoard(Player player) {
+        if (!isSetup(player)) {
+            return new FastBoard(player);
+        }
+        return boards.get(player);
+    }
+
+    public static void deleteBoard(Player player) {
+        boards.remove(player);
+    }
+
+    public static void build(Player player, Game game) {
+        FastBoard board = getBoard(player);
+        board.updateTitle("§3Domination");
+        board.updateLines(
+                "",
+                "§7Joueurs: §f" + Bukkit.getOnlinePlayers().size(),
+                "",
+                "§eplay.hydramc.net"
+        );
     }
 
 }

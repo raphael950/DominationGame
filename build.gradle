@@ -18,15 +18,19 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+
     implementation 'fr.mrcubee.library:weak-utilities:1.0'
     implementation 'fr.mrcubee.minecraft.library:plugin-annotation:1.0'
     implementation 'fr.mrcubee.minecraft.library:plugin-finder:1.0'
     implementation 'fr.mrcubee.minecraft.library:languagelib:1.0'
+
     implementation 'fr.mrmicky:FastInv:3.0.3'
+    implementation 'fr.mrmicky:fastboard:1.2.1'
 }
 
 shadowJar {
     relocate 'fr.mrmicky.fastinv', 'net.hydramc.domination'
+    relocate 'fr.mrmicky.fastboard', 'net.hydramc.domination'
 }
 
 test {

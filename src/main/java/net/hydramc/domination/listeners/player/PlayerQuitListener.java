@@ -1,9 +1,9 @@
 package net.hydramc.domination.listeners.player;
 
-import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.Game;
 import net.hydramc.domination.GameSetting;
+import net.hydramc.domination.scoreboard.ScoreboardBuilder;
 import net.hydramc.domination.utils.ActionBar;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -26,6 +26,8 @@ public class PlayerQuitListener implements Listener {
             return;
 
         Player player = event.getPlayer();
+        ScoreboardBuilder.deleteBoard(player);
+
         switch(Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
             case WAITING:
                 ActionBar.sendGlobalActionBar("game.waitting.leave_action_bar", player.getName(), Bukkit.getOnlinePlayers().size());

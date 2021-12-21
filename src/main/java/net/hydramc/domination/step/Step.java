@@ -62,8 +62,8 @@ public abstract class Step {
 
     public abstract void update();
 
-    public List<String> updateScoreboard(Player player, Game game) {
-        return ScoreboardBuilder.build(player, game);
+    public void updateScoreboard(Player player, Game game) {
+        ScoreboardBuilder.build(player, game);
     }
 
     public boolean canStepBack() {
