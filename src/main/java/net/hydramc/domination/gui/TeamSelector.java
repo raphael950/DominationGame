@@ -45,7 +45,6 @@ public class TeamSelector extends FastInv {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.blue.click", "ERROR", true));
                 player.getInventory().setItem(0, Banner.blue(player));
                 TeamManager.setTeam(player, "blue");
-                player.sendMessage(TeamManager.getTeam(player));
             }
 
         });
@@ -59,7 +58,6 @@ public class TeamSelector extends FastInv {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.red.click", "ERROR", true));
                 player.getInventory().setItem(0, Banner.red(player));
                 TeamManager.setTeam(player, "red");
-                player.sendMessage(TeamManager.getTeam(player));
             }
         });
 
