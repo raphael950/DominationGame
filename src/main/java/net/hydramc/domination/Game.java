@@ -65,4 +65,9 @@ public class Game {
     public Set<Player> getPlayers() {
         return this.players;
     }
+
+    public static void restart() {
+        // TODO: better restart function
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "plugman reload Domination");
+    }
 }

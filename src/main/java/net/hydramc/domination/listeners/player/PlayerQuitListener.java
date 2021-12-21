@@ -24,9 +24,6 @@ public class PlayerQuitListener implements Listener {
 
         if (game == null)
             return;
-        gameSetting = game.getGameSetting();
-        if ((Bukkit.getOnlinePlayers().size() - 1) < gameSetting.getMinPlayer())
-            game.setGameStats(GameStats.WAITING);
 
         Player player = event.getPlayer();
         switch(Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
@@ -35,7 +32,10 @@ public class PlayerQuitListener implements Listener {
                 break;
 
             case DURING:
-                // spec
+                if (Bukkit.getOnlinePlayers().size() == 1) {
+                    Game.restart();
+                    return;
+                }
                 break;
 
         }
