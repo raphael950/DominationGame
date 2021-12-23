@@ -38,7 +38,7 @@ public class PlayerJoinListener implements Listener {
         switch (Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
             case WAITING:
                 Utils.spawn(player);
-                ActionBar.sendGlobalActionBar("game.waitting.join_action_bar", player.getName(), Bukkit.getOnlinePlayers().size());
+                ActionBar.sendGlobalActionBar("game.waiting.join_action_bar", player.getName(), Bukkit.getOnlinePlayers().size());
                 break;
 
             case DURING:

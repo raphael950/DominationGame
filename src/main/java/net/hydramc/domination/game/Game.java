@@ -8,7 +8,9 @@ import net.hydramc.domination.event.GameStatsChangeEvent;
 import net.hydramc.domination.scoreboard.ScoreboardManager;
 import net.hydramc.domination.step.StepManager;
 import net.hydramc.domination.utils.Config;
+import net.hydramc.domination.utils.Region;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -21,8 +23,10 @@ public class Game {
     private final StepManager stepManager;
     private final Timer timer;
     private final Set<Player> players;
-    private Config locationConfig;
+    private final Config locationConfig;
     private GameStats gameStats;
+    private final Region redRegion;
+    private final Region blueRegion;
 
     public Game() {
         final Plugin plugin = (Plugin) PluginFinder.INSTANCE.findPluginCaller();
@@ -34,10 +38,22 @@ public class Game {
         this.stepManager = new StepManager(this);
         this.timer = new Timer(this);
         this.players = new WeakHashSet<Player>();
+
+        this.redRegion = new Region((Location) locationConfig.getConfig().get("spawn-red"), 30);
+        this.blueRegion = new Region((Location) locationConfig.getConfig().get("spawn-blue"), 30);
+
         if (plugin != null) {
             ConfigAnnotation.loadClass(plugin.getConfig(), gameSetting);
             this.timer.runTaskTimer(plugin, 0L, 10L);
         }
+    }
+
+    public Region getRedRegion() {
+        return this.redRegion;
+    }
+
+    public Region getBlueRegion() {
+        return this.blueRegion;
     }
 
     public GameSetting getGameSetting() {
@@ -73,8 +89,4 @@ public class Game {
         return this.players;
     }
 
-    public static void restart() {
-        // TODO: better restart function
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "plugman reload Domination");
-    }
 }

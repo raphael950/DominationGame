@@ -4,8 +4,8 @@ import fr.mrcubee.finder.plugin.PluginFinder;
 import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.FastInvManager;
 import net.hydramc.GameStats;
-import net.hydramc.domination.commands.Dm;
-import net.hydramc.domination.commands.Spawn;
+import net.hydramc.domination.commands.DominationCommand;
+import net.hydramc.domination.commands.SpawnCommand;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.listeners.RegisterListeners;
 import net.hydramc.domination.utils.Cooldown;
@@ -33,8 +33,8 @@ public class Domination extends JavaPlugin {
         FastInvManager.register(this);
         RegisterListeners.register();
 
-        this.getCommand("spawn").setExecutor(new Spawn());
-        this.getCommand("dm").setExecutor(new Dm());
+        this.getCommand("spawn").setExecutor(new SpawnCommand());
+        this.getCommand("domination").setExecutor(new DominationCommand());
 
         getLogger().info("On");
         this.game.setGameStats(GameStats.WAITING);
@@ -72,4 +72,5 @@ public class Domination extends JavaPlugin {
             return null;
         return dominationPlugin.getGame();
     }
+
 }

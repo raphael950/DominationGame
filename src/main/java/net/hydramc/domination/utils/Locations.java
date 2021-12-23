@@ -6,7 +6,7 @@ import org.bukkit.Location;
 public class Locations {
 
     public static Location getSpawn(String team) {
-        return (Location) Domination.getGameInstance().getLocationConfig().getConfig().get("lobby-" + team);
+        return (Location) Domination.getGameInstance().getLocationConfig().getConfig().get("spawn-" + team);
     }
 
     public static Location getLobby() {

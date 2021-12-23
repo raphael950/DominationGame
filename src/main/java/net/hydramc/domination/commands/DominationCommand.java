@@ -11,9 +11,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
-public class Dm implements CommandExecutor {
+public class DominationCommand implements CommandExecutor {
 
     private boolean setlobby(Domination plugin, Game game, Player sender, String[] args) {
         final Config config = Domination.getGameInstance().getLocationConfig();
@@ -24,9 +23,18 @@ public class Dm implements CommandExecutor {
     }
 
     private boolean set(Domination plugin, Game game, Player sender, String[] args) {
-        sender.sendMessage(Lang.getMessage(sender, "command.dm.set", "§8/dm set §7[location name]", true));
-        // TODO: Set location of argument in config
-        sender.sendMessage(Arrays.toString(args));
+        if (args.length == 0) {
+            sender.sendMessage(Lang.getMessage(sender, "command.dm.set", "§8/dm set §7red | blue", true));
+            return true;
+        }
+        String arg = args[0];
+        final Config config = Domination.getGameInstance().getLocationConfig();
+        if (arg.equals("red") || arg.equals("blue")) {
+            config.getConfig().set("spawn-" + arg, sender.getLocation());
+            config.save();
+            return true;
+        }
+        sender.sendMessage(Lang.getMessage(sender, "command.dm.set", "§8/dm set §7red | blue", true));
         return true;
     }
 
@@ -38,7 +46,7 @@ public class Dm implements CommandExecutor {
     private boolean start(Domination plugin, Game game, Player sender, String[] args) {
         if (!game.getGameStats().equals(GameStats.WAITING))
             sender.sendMessage(Lang.getMessage("none", "§8» §cLa partie est déjà en cours", true));
-        else if (game.setGameStats(GameStats.STARTING))
+        else if (game.setGameStats(GameStats.DURING))
             sender.sendMessage(Lang.getMessage(sender, "none", "§8» §7La partie a été lancée", true));
         else
             sender.sendMessage(Lang.getMessage(sender, "none", "§8» §cLa partie ne peut pas encore être lancée", true));
@@ -70,7 +78,7 @@ public class Dm implements CommandExecutor {
         subCommandArgs = new String[args.length - 1];
         System.arraycopy(args, 1, subCommandArgs, 0, subCommandArgs.length);
         try {
-            subCommandMethod = Dm.class.getDeclaredMethod(args[0].toLowerCase(), Domination.class, Game.class, Player.class, String[].class);
+            subCommandMethod = DominationCommand.class.getDeclaredMethod(args[0].toLowerCase(), Domination.class, Game.class, Player.class, String[].class);
         } catch (NoSuchMethodException ignored) {}
         if (subCommandMethod == null)
             return false;

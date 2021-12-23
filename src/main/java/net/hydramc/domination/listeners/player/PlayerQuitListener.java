@@ -30,12 +30,12 @@ public class PlayerQuitListener implements Listener {
 
         switch(Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
             case WAITING:
-                ActionBar.sendGlobalActionBar("game.waitting.leave_action_bar", player.getName(), Bukkit.getOnlinePlayers().size());
+                ActionBar.sendGlobalActionBar("game.waiting.leave_action_bar", player.getName(), Bukkit.getOnlinePlayers().size());
                 break;
 
             case DURING:
                 if (Bukkit.getOnlinePlayers().size() == 1) {
-                    Game.restart();
+                    // TODO: Map reset
                     return;
                 }
                 break;

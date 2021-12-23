@@ -53,11 +53,16 @@ public class Utils {
     }
 
     public static void death(Player player, Entity... attacker) {
-
         player.setGameMode(GameMode.SPECTATOR);
-
-
+        // TODO: Death system
     }
+
+    public static String reverseTeam(String team) {
+        if (team.equals("red"))
+            return "blue";
+        return "red";
+    }
+
 
 
 }
