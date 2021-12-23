@@ -2,12 +2,12 @@ package net.hydramc.domination.listeners.game;
 
 import fr.mrmicky.fastinv.ItemBuilder;
 import net.hydramc.GameStats;
+import net.hydramc.domination.Domination;
 import net.hydramc.domination.event.GameStatsChangeEvent;
 import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.Locations;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
+import net.hydramc.domination.utils.Utils;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -48,8 +48,14 @@ public class GameStatsChangeListener implements Listener {
             return;
         }
 
-        if (lastGameStats == GameStats.DURING) {
+        if (newGameStats == GameStats.STOPPING) {
             // TODO: Game restart
+            Utils.sendAllLobby();
+            Server server = Domination.getInstance().getServer();
+            server.unloadWorld(server.getWorld("FK-OASIS"), false);
+            World fk = new WorldCreator("FK-OASIS").environment(World.Environment.NORMAL).createWorld();
+            fk.setAutoSave(false);
+            Domination.getGameInstance().setGameStats(GameStats.WAITING);
         }
 
     }

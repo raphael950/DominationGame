@@ -73,11 +73,10 @@ public class Game {
     }
 
     public boolean setGameStats(GameStats newStats) {
-        if (newStats == null || this.gameStats == newStats
-        || (this.gameStats.ordinal() >= 2 && this.gameStats.ordinal() > newStats.ordinal()))
+        if (newStats == null || this.gameStats == newStats)
             return false;
-        Bukkit.getPluginManager().callEvent(new GameStatsChangeEvent(newStats));
         this.gameStats = newStats;
+        Bukkit.getPluginManager().callEvent(new GameStatsChangeEvent(newStats));
         return true;
     }
 

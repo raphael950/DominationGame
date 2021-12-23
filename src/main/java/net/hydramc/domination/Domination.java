@@ -10,8 +10,8 @@ import net.hydramc.domination.game.Game;
 import net.hydramc.domination.listeners.RegisterListeners;
 import net.hydramc.domination.utils.Cooldown;
 import net.hydramc.domination.utils.Utils;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,6 +21,10 @@ public class Domination extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+
+        World fk = new WorldCreator("FK-OASIS").environment(World.Environment.NORMAL).createWorld();
+        fk.setAutoSave(false);
 
         this.game = new Game();
         this.game.setGameStats(GameStats.OPENING);
@@ -39,9 +43,7 @@ public class Domination extends JavaPlugin {
         getLogger().info("On");
         this.game.setGameStats(GameStats.WAITING);
 
-        for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            Utils.spawn(player.getPlayer());
-        }
+        Utils.sendAllLobby();
 
     }
 
