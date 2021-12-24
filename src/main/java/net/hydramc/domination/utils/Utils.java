@@ -25,9 +25,17 @@ public class Utils {
         giveJoinItems(player);
     }
 
+    public static void clearArmor(Player player) {
+        player.getInventory().setHelmet(null);
+        player.getInventory().setChestplate(null);
+        player.getInventory().setLeggings(null);
+        player.getInventory().setBoots(null);
+    }
+
     public static void giveJoinItems(Player player) {
 
         player.getInventory().setHeldItemSlot(0);
+        clearArmor(player);
 
         Inventory inventory = player.getInventory();
         inventory.clear();

@@ -9,14 +9,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import java.util.Objects;
-
 public class PlayerInteractListener implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
 
-        if (!(Objects.requireNonNull(Domination.getGameInstance()).getGameStats().equals(GameStats.DURING))) {
+        if (!Domination.getGameInstance().getGameStats().equals(GameStats.DURING)) {
             event.setCancelled(true);
         }
 

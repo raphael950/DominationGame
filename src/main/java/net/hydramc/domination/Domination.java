@@ -22,7 +22,7 @@ public class Domination extends JavaPlugin {
     @Override
     public void onEnable() {
 
-
+        this.getServer().unloadWorld(this.getServer().getWorld("FK-OASIS"), false);
         World fk = new WorldCreator("FK-OASIS").environment(World.Environment.NORMAL).createWorld();
         fk.setAutoSave(false);
 

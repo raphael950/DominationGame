@@ -20,6 +20,9 @@ game.waiting.gui.red.click=&8» &7The &cred &7team has been selected.
 
 game.during.not_assaut=&8» &cPlease wait the assault phase.
 
+game.during.prefix.red="&cRed "
+game.during.prefix.blue="&9Blue "
+
 # Commands
 
 command.dm.setlobby=&8» &7The &elobb§7's location has been changed.

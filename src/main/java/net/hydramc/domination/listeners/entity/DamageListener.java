@@ -2,6 +2,7 @@ package net.hydramc.domination.listeners.entity;
 
 import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
+import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.Utils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -11,44 +12,61 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-import java.util.Objects;
-
 public class DamageListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
-
-        if (!(Objects.requireNonNull(Domination.getGameInstance()).getGameStats() == GameStats.DURING))
+        GameStats gameStats = Domination.getGameInstance().getGameStats();
+        if (!GameStats.DURING.equals(gameStats))
             event.setCancelled(true);
-
     }
 
     @EventHandler
     public void onDamageByEntity(EntityDamageByEntityEvent event) {
 
-        if (!(event.getEntity().getType() == EntityType.PLAYER)) {
+        final GameStats gameStats = Domination.getGameInstance().getGameStats();
+
+        if (!GameStats.DURING.equals(gameStats)) {
+            event.setCancelled(true);
             return;
         }
 
-        Player player = (Player) event.getEntity();
+        final Entity victimEntity = event.getEntity();
+        final Entity damagerEntity = event.getDamager();
 
-        switch (Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
+        final double damageValue = event.getFinalDamage();
 
-            case WAITING:
+        switch (victimEntity.getType()) {
+
+            case PLAYER:
+                break;
+
+            case ENDER_CRYSTAL:
                 event.setCancelled(true);
-                break;
+                // TODO: Target is endercrystal
+                damagerEntity.sendMessage("En dev");
+                return;
 
-            case DURING:
-                event.setDamage(0);
-
-                double damageValue = event.getFinalDamage();
-                if (damageValue >= player.getHealth()) {
-                    Entity attacker = event.getDamager();
-                    Utils.death(player, attacker);
-                }
-                break;
+            default:
+                return;
 
         }
+
+        final Player victim = (Player) victimEntity;
+
+        if (damageValue >= victim.getHealth()) {
+            event.setDamage(0);
+            Utils.death(victim, damagerEntity);
+            return;
+        }
+
+        if (!damagerEntity.getType().equals(EntityType.PLAYER))
+            return;
+
+        final Player damager = (Player) damagerEntity;
+
+        if (TeamManager.getTeam(victim).equals(TeamManager.getTeam(damager)))
+            event.setCancelled(true);
 
     }
 

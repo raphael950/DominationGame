@@ -19,6 +19,9 @@ game.waiting.gui.red.click=&8» &7L'équipe &crouge &7a été sélectionnée.
 
 game.during.not_assaut=&8» &cVeuillez attendre la phase d'assaut
 
+game.during.prefix.red="&cRouge "
+game.during.prefix.blue="&9Bleue "
+
 # Commands
 
 command.dm.setlobby=&8» §7La location du &elobby &7a été changé.
