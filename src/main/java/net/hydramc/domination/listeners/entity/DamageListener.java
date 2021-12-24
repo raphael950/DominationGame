@@ -3,7 +3,7 @@ package net.hydramc.domination.listeners.entity;
 import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.team.TeamManager;
-import net.hydramc.domination.utils.Utils;
+import net.hydramc.domination.utils.GameUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -56,7 +56,7 @@ public class DamageListener implements Listener {
 
         if (damageValue >= victim.getHealth()) {
             event.setDamage(0);
-            Utils.death(victim, damagerEntity);
+            GameUtils.death(victim, damagerEntity);
             return;
         }
 

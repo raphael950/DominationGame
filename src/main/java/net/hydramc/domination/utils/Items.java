@@ -6,23 +6,23 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class Banner {
+public class Items {
 
-    public static ItemStack white(Player player) {
+    public static ItemStack whiteBanner(Player player) {
         return new ItemBuilder(Material.BANNER)
                 .data(15)
                 .name(Lang.getMessage(player, "game.waiting.item.team_selector", "ERROR", true))
                 .build();
     }
 
-    public static ItemStack red(Player player) {
+    public static ItemStack redBanner(Player player) {
         return new ItemBuilder(Material.BANNER)
                 .data(1)
                 .name(Lang.getMessage(player, "game.waiting.item.team_selector", "ERROR", true))
                 .build();
     }
 
-    public static ItemStack blue(Player player) {
+    public static ItemStack blueBanner(Player player) {
         return new ItemBuilder(Material.BANNER)
                 .data(4)
                 .name(Lang.getMessage(player, "game.waiting.item.team_selector", "ERROR", true))

@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class Utils {
+public class GameUtils {
 
     public static void spawn(Player player) {
         player.setGameMode(GameMode.ADVENTURE);
@@ -40,7 +40,7 @@ public class Utils {
         Inventory inventory = player.getInventory();
         inventory.clear();
 
-        ItemStack teamSelector = Banner.white(player);
+        ItemStack teamSelector = Items.whiteBanner(player);
         ItemStack lobbyItem = new ItemBuilder(Material.BED)
                 .name(Lang.getMessage(player, "game.waiting.item.lobby_item", "ERROR", true))
                 .build();
@@ -64,6 +64,7 @@ public class Utils {
     public static void death(Player player, Entity... attacker) {
         player.setGameMode(GameMode.SPECTATOR);
         // TODO: Death system
+
     }
 
     public static String reverseTeam(String team) {
@@ -75,7 +76,7 @@ public class Utils {
 
     public static void sendAllLobby() {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            Utils.spawn(player.getPlayer());
+            GameUtils.spawn(player.getPlayer());
         }
     }
 }

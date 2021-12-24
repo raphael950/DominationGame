@@ -3,7 +3,7 @@ package net.hydramc.domination.listeners.player;
 import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.gui.TeamSelector;
-import net.hydramc.domination.utils.Utils;
+import net.hydramc.domination.utils.GameUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +14,7 @@ public class PlayerInteractListener implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
 
-        if (!Domination.getGameInstance().getGameStats().equals(GameStats.DURING)) {
+        if (!GameStats.DURING.equals(Domination.getGameInstance().getGameStats())) {
             event.setCancelled(true);
         }
 
@@ -25,7 +25,7 @@ public class PlayerInteractListener implements Listener {
 
         switch (event.getItem().getType()) {
             case BED:
-                Utils.sendToLobby(player);
+                GameUtils.sendToLobby(player);
                 break;
             case BANNER:
                 new TeamSelector(player).open(player);

@@ -9,7 +9,7 @@ import net.hydramc.domination.commands.SpawnCommand;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.listeners.RegisterListeners;
 import net.hydramc.domination.utils.Cooldown;
-import net.hydramc.domination.utils.Utils;
+import net.hydramc.domination.utils.GameUtils;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.plugin.Plugin;
@@ -43,7 +43,7 @@ public class Domination extends JavaPlugin {
         getLogger().info("On");
         this.game.setGameStats(GameStats.WAITING);
 
-        Utils.sendAllLobby();
+        GameUtils.sendAllLobby();
 
     }
 

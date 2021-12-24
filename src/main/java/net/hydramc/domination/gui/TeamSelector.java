@@ -5,7 +5,7 @@ import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
 import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.ActionBar;
-import net.hydramc.domination.utils.Banner;
+import net.hydramc.domination.utils.Items;
 import net.hydramc.domination.utils.Cooldown;
 import net.hydramc.domination.utils.Head;
 import org.bukkit.Material;
@@ -26,7 +26,7 @@ public class TeamSelector extends FastInv {
         setItem(4, head, e -> {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.random.click", "ERROR", true));
-                player.getInventory().setItem(0, Banner.white(player));
+                player.getInventory().setItem(0, Items.whiteBanner(player));
 
                 if (TeamManager.hasTeam(player)) {
                     TeamManager.removeTeam(player);
@@ -43,7 +43,7 @@ public class TeamSelector extends FastInv {
         setItem(2, blueFlag, e -> {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.blue.click", "ERROR", true));
-                player.getInventory().setItem(0, Banner.blue(player));
+                player.getInventory().setItem(0, Items.blueBanner(player));
                 TeamManager.setTeam(player, "blue");
             }
 
@@ -56,7 +56,7 @@ public class TeamSelector extends FastInv {
         setItem(6, redFlag, e -> {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.red.click", "ERROR", true));
-                player.getInventory().setItem(0, Banner.red(player));
+                player.getInventory().setItem(0, Items.redBanner(player));
                 TeamManager.setTeam(player, "red");
             }
         });

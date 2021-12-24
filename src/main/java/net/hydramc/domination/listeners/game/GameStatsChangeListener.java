@@ -6,7 +6,7 @@ import net.hydramc.domination.Domination;
 import net.hydramc.domination.event.GameStatsChangeEvent;
 import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.Locations;
-import net.hydramc.domination.utils.Utils;
+import net.hydramc.domination.utils.GameUtils;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -50,7 +50,7 @@ public class GameStatsChangeListener implements Listener {
 
         if (newGameStats == GameStats.STOPPING) {
             // TODO: Game restart
-            Utils.sendAllLobby();
+            GameUtils.sendAllLobby();
             Server server = Domination.getInstance().getServer();
             server.unloadWorld(server.getWorld("FK-OASIS"), false);
             World fk = new WorldCreator("FK-OASIS").environment(World.Environment.NORMAL).createWorld();
