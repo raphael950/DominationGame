@@ -5,6 +5,7 @@ import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.game.GameSetting;
 import net.hydramc.domination.scoreboard.ScoreboardBuilder;
+import net.hydramc.domination.team.Team;
 import net.hydramc.domination.utils.ActionBar;
 import net.hydramc.domination.utils.GameUtils;
 import org.bukkit.Bukkit;
@@ -37,6 +38,7 @@ public class PlayerJoinListener implements Listener {
 
         switch (Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
             case WAITING:
+                game.getRandom().addPlayer(player);
                 GameUtils.spawn(player);
                 ActionBar.sendGlobalActionBar("game.waiting.join_action_bar", player.getName(), Bukkit.getOnlinePlayers().size());
                 break;

@@ -4,6 +4,8 @@ import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.game.GameSetting;
 import net.hydramc.domination.scoreboard.ScoreboardBuilder;
+import net.hydramc.domination.team.Team;
+import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.ActionBar;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -27,6 +29,8 @@ public class PlayerQuitListener implements Listener {
 
         Player player = event.getPlayer();
         ScoreboardBuilder.deleteBoard(player);
+
+        TeamManager.removeTeam(player);
 
         switch(Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
             case WAITING:

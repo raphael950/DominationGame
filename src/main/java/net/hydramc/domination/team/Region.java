@@ -1,4 +1,4 @@
-package net.hydramc.domination.utils;
+package net.hydramc.domination.team;
 
 import org.bukkit.Location;
 

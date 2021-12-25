@@ -7,8 +7,10 @@ import net.hydramc.GameStats;
 import net.hydramc.domination.event.GameStatsChangeEvent;
 import net.hydramc.domination.scoreboard.ScoreboardManager;
 import net.hydramc.domination.step.StepManager;
+import net.hydramc.domination.team.Team;
+import net.hydramc.domination.team.TeamColor;
 import net.hydramc.domination.utils.Config;
-import net.hydramc.domination.utils.Region;
+import net.hydramc.domination.team.Region;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -27,6 +29,9 @@ public class Game {
     private GameStats gameStats;
     private final Region redRegion;
     private final Region blueRegion;
+    private Team red;
+    private Team blue;
+    private Team random;
 
     public Game() {
         final Plugin plugin = (Plugin) PluginFinder.INSTANCE.findPluginCaller();
@@ -39,8 +44,12 @@ public class Game {
         this.timer = new Timer(this);
         this.players = new WeakHashSet<Player>();
 
-        this.redRegion = new Region((Location) locationConfig.getConfig().get("spawn-red"), 30);
-        this.blueRegion = new Region((Location) locationConfig.getConfig().get("spawn-blue"), 30);
+        this.red = new Team("red", new TeamColor("Rouge", "§c"));
+        this.blue = new Team("blue", new TeamColor("Bleue", "§9"));
+        this.random = new Team("random", new TeamColor("", "§7"));
+
+        this.redRegion = new Region((Location) locationConfig.getConfig().get("center-red"), 30);
+        this.blueRegion = new Region((Location) locationConfig.getConfig().get("center-blue"), 30);
 
         if (plugin != null) {
             ConfigAnnotation.loadClass(plugin.getConfig(), gameSetting);
@@ -54,6 +63,18 @@ public class Game {
 
     public Region getBlueRegion() {
         return this.blueRegion;
+    }
+
+    public Team getRed() {
+        return red;
+    }
+
+    public Team getBlue() {
+        return blue;
+    }
+
+    public Team getRandom() {
+        return random;
     }
 
     public GameSetting getGameSetting() {

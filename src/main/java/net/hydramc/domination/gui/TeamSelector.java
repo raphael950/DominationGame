@@ -3,6 +3,8 @@ package net.hydramc.domination.gui;
 import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
+import net.hydramc.domination.Domination;
+import net.hydramc.domination.game.Game;
 import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.ActionBar;
 import net.hydramc.domination.utils.Items;
@@ -16,6 +18,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class TeamSelector extends FastInv {
 
+    private final Game game = Domination.getGameInstance();
+
     public TeamSelector(Player player) {
 
         super(9, Lang.getMessage("game.waiting.gui.title", "ERROR", true));
@@ -28,9 +32,7 @@ public class TeamSelector extends FastInv {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.random.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.whiteBanner(player));
 
-                if (TeamManager.hasTeam(player)) {
-                    TeamManager.removeTeam(player);
-                }
+                TeamManager.forceTeam(player, game.getRandom());
             }
 
         });
@@ -44,7 +46,7 @@ public class TeamSelector extends FastInv {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.blue.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.blueBanner(player));
-                TeamManager.setTeam(player, "blue");
+                TeamManager.forceTeam(player, game.getBlue());
             }
 
         });
@@ -57,7 +59,7 @@ public class TeamSelector extends FastInv {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.red.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.redBanner(player));
-                TeamManager.setTeam(player, "red");
+                TeamManager.forceTeam(player, game.getRed());
             }
         });
 

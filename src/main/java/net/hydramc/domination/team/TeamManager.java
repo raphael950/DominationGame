@@ -1,63 +1,78 @@
 package net.hydramc.domination.team;
 
+import net.hydramc.domination.Domination;
+import net.hydramc.domination.game.Game;
 import org.bukkit.entity.Player;
-
-import java.util.WeakHashMap;
 
 public class TeamManager {
 
-    private static WeakHashMap<Player, String> teams = new WeakHashMap<>();
+    public static Team getTeam(Player player) {
 
-    public static void setupTeams() {
+        final Game game = Domination.getGameInstance();
 
-        teams = new WeakHashMap<>();
+        Team red = game.getRed();
+        if (red.isMember(player))
+            return red;
 
-    }
+        Team blue = game.getBlue();
+        if (blue.isMember(player))
+            return blue;
 
-    public static String getTeam(Player player) {
+        Team random = game.getRandom();
+        if (random.isMember(player))
+            return random;
 
-        return teams.get(player);
-
-    }
-
-    public static Boolean hasTeam(Player player) {
-
-        return teams.get(player) != null;
-
-    }
-
-    public static void setTeam(Player player, String team) {
-
-        teams.put(player, team);
-
-    }
-
-    public static void setRandomTeam(Player player) {
-
-        int redSize = 0;
-        int blueSize = 0;
-
-        for (Player loopPlayer : teams.keySet()) {
-            if (hasTeam(loopPlayer)) {
-                if (getTeam(loopPlayer).equals("red")) {
-                    redSize++;
-                } else {
-                    blueSize++;
-                }
-            }
-        }
-
-        if (redSize >= blueSize) {
-            TeamManager.setTeam(player, "red");
-        } else {
-            TeamManager.setTeam(player, "blue");
-        }
+        return null;
 
     }
 
     public static void removeTeam(Player player) {
+        final Game game = Domination.getGameInstance();
+        game.getRed().removePlayer(player);
+        game.getBlue().removePlayer(player);
+        game.getRandom().removePlayer(player);
+    }
 
-        teams.remove(player);
+    public static void forceTeam(Player player, Team team) {
+
+        Team before = getTeam(player);
+
+        if (before == team)
+            return;
+        if (before != null) {
+            before.removePlayer(player);
+        }
+        team.addPlayer(player);
+
+    }
+
+    public static Team setRandomTeam(Player player) {
+
+        final Game game = Domination.getGameInstance();
+        Team red = game.getRed();
+        Team blue = game.getBlue();
+
+        Team team = getTeam(player);
+
+        if (team == null || game.getRandom().equals(team)) {
+            if (red.getSize() < blue.getSize()) {
+                red.addPlayer(player);
+                return red;
+            }
+            if (red.getSize() > blue.getSize()) {
+                blue.addPlayer(player);
+                return blue;
+            }
+            double random = Math.random();
+
+            if (random > 0.5) {
+                red.addPlayer(player);
+                return red;
+            }
+            blue.addPlayer(player);
+            return blue;
+        }
+        return team;
 
     }
 
