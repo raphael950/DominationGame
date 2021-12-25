@@ -6,8 +6,7 @@ import org.bukkit.entity.Player;
 
 public class ScoreboardManager {
 
-    public void updateAllPlayers() {
-        // TODO: Loop for update all player's sidebar scoreboard (use ScoreboardBuilder.build(player, game))
+    public static void updateAllPlayers() {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             ScoreboardBuilder.build(player, Domination.getGameInstance());

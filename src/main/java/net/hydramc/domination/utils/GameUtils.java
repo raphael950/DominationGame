@@ -5,6 +5,9 @@ import com.google.common.io.ByteStreams;
 import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.ItemBuilder;
 import net.hydramc.domination.Domination;
+import net.hydramc.domination.game.Game;
+import net.hydramc.domination.team.Region;
+import net.hydramc.domination.team.Team;
 import net.hydramc.domination.team.TeamManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -81,4 +84,12 @@ public class GameUtils {
             TeamManager.setRandom(player);
         }
     }
+
+    public static boolean isEnemyArea(Team team, Location location, Game game) {
+        if (team.getName().equals("red")) {
+            return game.getBlueRegion().isInCircle(location);
+        }
+        return game.getRedRegion().isInCircle(location);
+    }
+
 }

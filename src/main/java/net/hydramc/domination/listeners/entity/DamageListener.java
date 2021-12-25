@@ -59,11 +59,15 @@ public class DamageListener implements Listener {
 
         // Here victim is Player
 
-        if (damageValue >= victim.getHealth()) {
+        // TEMP FOR TEST
+        event.setDamage(0);
+
+        // TEMP FOR TEST
+        /*if (damageValue >= victim.getHealth()) {
             event.setDamage(0);
             GameUtils.death(victim, damagerEntity);
             return;
-        }
+        }*/
 
         if (!damagerEntity.getType().equals(EntityType.PLAYER)) return;
 

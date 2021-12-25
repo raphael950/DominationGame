@@ -5,6 +5,7 @@ import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.event.GameStatsChangeEvent;
 import net.hydramc.domination.game.Game;
+import net.hydramc.domination.scoreboard.ScoreboardManager;
 import net.hydramc.domination.team.Team;
 import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.Locations;
@@ -33,6 +34,7 @@ public class GameStatsChangeListener implements Listener {
         if (newGameStats == GameStats.DURING) {
 
             Game game = Domination.getGameInstance();
+            ScoreboardManager.updateAllPlayers();
 
             for (Player player : Bukkit.getOnlinePlayers()) {
 
@@ -42,7 +44,7 @@ public class GameStatsChangeListener implements Listener {
                 player.setGameMode(GameMode.SURVIVAL);
                 Inventory inv = player.getInventory();
                 inv.clear();
-                ItemStack sword = new ItemBuilder(Material.IRON_SWORD).enchant(Enchantment.DAMAGE_ALL, 2).build();
+                ItemStack sword = new ItemBuilder(Material.IRON_SWORD).enchant(Enchantment.DAMAGE_ALL, 2).meta(itemMeta -> itemMeta.spigot().setUnbreakable(true)).build();
                 ItemStack gapple = new ItemBuilder(Material.GOLDEN_APPLE).amount(3).build();
                 ItemStack pickaxe = new ItemBuilder(Material.IRON_PICKAXE).enchant(Enchantment.DIG_SPEED, 2).meta(itemMeta -> itemMeta.spigot().setUnbreakable(true)).build();
                 inv.setItem(0, sword);
@@ -60,6 +62,7 @@ public class GameStatsChangeListener implements Listener {
             World fk = new WorldCreator("FK-OASIS").environment(World.Environment.NORMAL).createWorld();
             fk.setAutoSave(false);
             Domination.getGameInstance().setGameStats(GameStats.WAITING);
+            ScoreboardManager.updateAllPlayers();
         }
 
     }

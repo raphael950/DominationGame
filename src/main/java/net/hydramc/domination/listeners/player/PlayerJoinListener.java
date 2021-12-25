@@ -4,8 +4,7 @@ import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.game.GameSetting;
-import net.hydramc.domination.scoreboard.ScoreboardBuilder;
-import net.hydramc.domination.team.Team;
+import net.hydramc.domination.scoreboard.ScoreboardManager;
 import net.hydramc.domination.utils.ActionBar;
 import net.hydramc.domination.utils.GameUtils;
 import org.bukkit.Bukkit;
@@ -34,7 +33,7 @@ public class PlayerJoinListener implements Listener {
 
         Player player = event.getPlayer();
 
-        ScoreboardBuilder.build(player, game);
+        ScoreboardManager.updateAllPlayers();
 
         switch (Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
             case WAITING:

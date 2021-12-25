@@ -1,7 +1,6 @@
 package net.hydramc.domination.scoreboard;
 
 import fr.mrmicky.fastboard.FastBoard;
-import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -40,7 +39,7 @@ public class ScoreboardBuilder {
         FastBoard board = getBoard(player);
         board.updateTitle("§3Domination");
 
-        switch (Domination.getGameInstance().getGameStats()) {
+        switch (game.getGameStats()) {
 
             case WAITING:
                 board.updateLines(
@@ -58,8 +57,8 @@ public class ScoreboardBuilder {
                         "",
                         "§7Jour: §b1",
                         "",
-                        "§cRouge: " + "§e500",
-                        "§9Bleu: " + "§e500",
+                        "§cRouge: " + "§f500",
+                        "§9Bleu: " + "§f500",
                         "",
                         "§eplay.hydramc.net"
                 );
