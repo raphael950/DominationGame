@@ -6,9 +6,9 @@ import org.bukkit.entity.Player;
 
 public class TeamManager {
 
-    public static Team getTeam(Player player) {
+    private static final Game game = Domination.getGameInstance();
 
-        final Game game = Domination.getGameInstance();
+    public static Team getTeam(Player player) {
 
         Team red = game.getRed();
         if (red.isMember(player))
@@ -27,10 +27,15 @@ public class TeamManager {
     }
 
     public static void removeTeam(Player player) {
-        final Game game = Domination.getGameInstance();
         game.getRed().removePlayer(player);
         game.getBlue().removePlayer(player);
         game.getRandom().removePlayer(player);
+    }
+
+    public static void setRandom(Player player) {
+        game.getRed().removePlayer(player);
+        game.getBlue().removePlayer(player);
+        game.getRandom().addPlayer(player);
     }
 
     public static void forceTeam(Player player, Team team) {
@@ -48,7 +53,6 @@ public class TeamManager {
 
     public static Team setRandomTeam(Player player) {
 
-        final Game game = Domination.getGameInstance();
         Team red = game.getRed();
         Team blue = game.getBlue();
 

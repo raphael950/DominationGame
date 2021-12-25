@@ -5,6 +5,7 @@ import com.google.common.io.ByteStreams;
 import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.ItemBuilder;
 import net.hydramc.domination.Domination;
+import net.hydramc.domination.team.TeamManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -76,7 +77,8 @@ public class GameUtils {
 
     public static void sendAllLobby() {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            GameUtils.spawn(player.getPlayer());
+            GameUtils.spawn(player);
+            TeamManager.setRandom(player);
         }
     }
 }

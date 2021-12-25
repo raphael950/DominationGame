@@ -1,23 +1,21 @@
 package net.hydramc.domination.team;
 
+import fr.mrcubee.weak.WeakHashSet;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Team {
 
     private final String name;
     private final TeamColor teamColor;
-    private List<Player> players;
+    private WeakHashSet<Player> players;
 
     public Team(final String name, final TeamColor teamColor) {
         this.name = name;
         this.teamColor = teamColor;
-        this.players = new ArrayList<>();
+        this.players = new WeakHashSet<>();
     }
 
-    public Team(final String name, final TeamColor teamColor, final List<Player> players) {
+    public Team(final String name, final TeamColor teamColor, final WeakHashSet<Player> players) {
         this.name = name;
         this.teamColor = teamColor;
         this.players = players;
@@ -45,7 +43,7 @@ public class Team {
         return this.teamColor;
     }
 
-    public List<Player> getPlayers() {
+    public WeakHashSet<Player> getPlayers() {
         return this.players;
     }
 
@@ -53,7 +51,7 @@ public class Team {
         return this.players.size();
     }
 
-    public void setPlayers(final List<Player> players) {
+    public void setPlayers(final WeakHashSet<Player> players) {
         this.players = players;
     }
 
