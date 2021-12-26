@@ -1,14 +1,10 @@
 package net.hydramc.domination.listeners.player;
 
-import javafx.scene.control.Tab;
-import me.neznamy.tab.api.TabAPI;
-import me.neznamy.tab.api.TabPlayer;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.game.GameSetting;
 import net.hydramc.domination.scoreboard.ScoreboardBuilder;
 import net.hydramc.domination.scoreboard.ScoreboardManager;
-import net.hydramc.domination.team.NameTag;
 import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.ActionBar;
 import org.bukkit.Bukkit;
