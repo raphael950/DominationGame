@@ -1,5 +1,6 @@
 package net.hydramc.domination.listeners.game;
 
+import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.ItemBuilder;
 import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
@@ -56,9 +57,19 @@ public class GameStatsChangeListener implements Listener {
                 inv.setItem(1, gapple);
                 inv.setItem(2, pickaxe);
             }
+
         }
 
-        if (lastGameStats == GameStats.CLOSING) {
+        if (newGameStats == GameStats.STOPPING) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (player.getGameMode() == GameMode.SPECTATOR)
+                    continue;
+                player.setGameMode(GameMode.SPECTATOR);
+                player.sendMessage(Lang.getMessage("game.stopping.message", "ERROR", true));
+            }
+        }
+
+        if (newGameStats == GameStats.CLOSING) {
             Bukkit.getServer().shutdown();
         }
 
