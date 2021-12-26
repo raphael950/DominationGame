@@ -9,6 +9,8 @@ import org.bukkit.craftbukkit.v1_8_R3.CraftServer;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftIronGolem;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
+import java.util.Objects;
+
 public class CraftEscortedEntity extends CraftIronGolem implements EscortedEntity {
 
     private Team teamTarget;
@@ -27,9 +29,11 @@ public class CraftEscortedEntity extends CraftIronGolem implements EscortedEntit
     public void setTeamTarget(Team team) {
         final EscortedEntityChangeTeamTarget event = new EscortedEntityChangeTeamTarget(this, this.teamTarget, teamTarget);
 
-        Bukkit.getPluginManager().callEvent(event);
-        if (event.isCancelled())
-            return;
+        if (Objects.hashCode(team) != Objects.hashCode(teamTarget)) {
+            Bukkit.getPluginManager().callEvent(event);
+            if (event.isCancelled())
+                return;
+        }
         this.teamTarget = event.getTarget();
     }
 
