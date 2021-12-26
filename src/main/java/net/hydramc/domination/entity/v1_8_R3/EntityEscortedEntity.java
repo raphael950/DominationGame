@@ -1,7 +1,9 @@
 package net.hydramc.domination.entity.v1_8_R3;
 
+import net.hydramc.util.FieldReflection;
 import net.minecraft.server.v1_8_R3.EntityIronGolem;
 import net.minecraft.server.v1_8_R3.EntityLiving;
+import net.minecraft.server.v1_8_R3.PathfinderGoalSelector;
 import net.minecraft.server.v1_8_R3.World;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
@@ -9,10 +11,27 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 
+import java.util.List;
+
 public class EntityEscortedEntity extends EntityIronGolem {
+
+    private static void clearPathFinderGoalSelector(PathfinderGoalSelector pathfinderGoalSelector) {
+        List<?> list;
+
+        if (pathfinderGoalSelector == null)
+            return;
+        list = (List<?>) FieldReflection.getFieldValue("b", PathfinderGoalSelector.class, pathfinderGoalSelector);
+        if (list != null)
+            list.clear();
+        list = (List<?>) FieldReflection.getFieldValue("c", PathfinderGoalSelector.class, pathfinderGoalSelector);
+        if (list != null)
+            list.clear();
+    }
 
     public EntityEscortedEntity(World world) {
         super(world);
+        clearPathFinderGoalSelector(this.goalSelector);
+        clearPathFinderGoalSelector(this.targetSelector);
     }
 
     @Override
