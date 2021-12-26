@@ -5,6 +5,7 @@ import fr.mrcubee.finder.plugin.PluginFinder;
 import fr.mrcubee.weak.WeakHashSet;
 import net.hydramc.GameStats;
 import net.hydramc.domination.event.GameStatsChangeEvent;
+import net.hydramc.domination.player.PlayerStatsManager;
 import net.hydramc.domination.scoreboard.ScoreboardManager;
 import net.hydramc.domination.step.StepManager;
 import net.hydramc.domination.team.Team;
@@ -22,6 +23,8 @@ public class Game {
 
     private final GameSetting gameSetting;
     private final StepManager stepManager;
+    private final PlayerStatsManager playerStatsManager;
+    private final ScoreboardManager scoreboardManager;
     private final Timer timer;
     private final Set<Player> players;
     private final Config locationConfig;
@@ -31,7 +34,6 @@ public class Game {
     private final Team red;
     private final Team blue;
     private final Team random;
-    private final ScoreboardManager scoreboardManager;
 
     public Game() {
         final Plugin plugin = (Plugin) PluginFinder.INSTANCE.findPluginCaller();
@@ -40,10 +42,10 @@ public class Game {
         this.locationConfig = new Config("locations.yml", plugin);
         this.gameSetting = new GameSetting();
         this.stepManager = new StepManager(this);
+        this.playerStatsManager = new PlayerStatsManager();
+        this.scoreboardManager = new ScoreboardManager();
         this.timer = new Timer(this);
         this.players = new WeakHashSet<Player>();
-
-        this.scoreboardManager = new ScoreboardManager();
 
         this.red = new Team("red", new TeamColor("Rouge", "§c", "&l▲§r"));
         this.blue = new Team("blue", new TeamColor("Bleue", "§9", "■"));
@@ -103,6 +105,10 @@ public class Game {
 
     public Set<Player> getPlayers() {
         return this.players;
+    }
+
+    public PlayerStatsManager getPlayerStatsManager() {
+        return this.playerStatsManager;
     }
 
     public ScoreboardManager getScoreboardManager() {
