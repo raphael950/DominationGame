@@ -31,9 +31,9 @@ public class PlayerMoveListener implements Listener {
         if (team == null)
             return;
 
-        PlayerData playerData = PlayerData.get(player);
         Location location = player.getLocation();
 
+        /* TODO: Rework this code. Require Team class completed !
         if (playerData.getInBase()) {
             // player is already in his base.
             if (!GameUtils.isInArea(team, location, game)) {
@@ -53,12 +53,11 @@ public class PlayerMoveListener implements Listener {
                 ActionBar.sendPlayerActionBar(player, Lang.getMessage(player, "game.during.left_enemyBase", "ERROR", true));
                 playerData.setInEnemyBase(false);
             }
-
         } else if (GameUtils.isInEnemyArea(team, location, game)) {
             ActionBar.sendPlayerActionBar(player, Lang.getMessage(player, "game.during.left_enemyBase", "ERROR", true));
             playerData.setInEnemyBase(false);
         }
-
+         */
     }
 
 }
