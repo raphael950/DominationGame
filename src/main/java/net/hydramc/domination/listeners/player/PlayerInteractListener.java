@@ -73,7 +73,7 @@ public class PlayerInteractListener implements Listener {
             switch (clickedBlock.getType()) {
 
                 case DARK_OAK_FENCE_GATE:
-                    if (GameUtils.isEnemyArea(team, clickedBlock.getLocation(), game))
+                    if (GameUtils.isInEnemyArea(team, clickedBlock.getLocation(), game))
                         event.setCancelled(true);
                     break;
 

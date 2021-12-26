@@ -36,7 +36,7 @@ public class PlayerBlockListener implements Listener {
         final Location location = event.getBlock().getLocation();
         final Team team = TeamManager.getTeam(player);
 
-        if (GameUtils.isEnemyArea(team, location, game)) {
+        if (GameUtils.isInEnemyArea(team, location, game)) {
             event.setCancelled(true);
             ActionBar.sendPlayerActionBar(player, Lang.getMessage(player, "game.during.not_assaut", "ERROR", true));
         }
@@ -61,7 +61,7 @@ public class PlayerBlockListener implements Listener {
         final Location location = event.getBlock().getLocation();
         final Team team = TeamManager.getTeam(player);
 
-        if (GameUtils.isEnemyArea(team, location, game)) {
+        if (GameUtils.isInArea(team, location, game)) {
             event.setCancelled(true);
             ActionBar.sendPlayerActionBar(player, Lang.getMessage(player, "game.during.not_assaut", "ERROR", true));
         }

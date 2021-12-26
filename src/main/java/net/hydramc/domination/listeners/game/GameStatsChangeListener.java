@@ -6,14 +6,16 @@ import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.event.GameStatsChangeEvent;
 import net.hydramc.domination.game.Game;
+import net.hydramc.domination.player.PlayerData;
 import net.hydramc.domination.scoreboard.ScoreboardManager;
 import net.hydramc.domination.team.NameTag;
 import net.hydramc.domination.team.Team;
 import net.hydramc.domination.team.TeamColor;
 import net.hydramc.domination.team.TeamManager;
-import net.hydramc.domination.utils.GameUtils;
 import net.hydramc.domination.utils.Locations;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -41,6 +43,8 @@ public class GameStatsChangeListener implements Listener {
 
             for (Player player : Bukkit.getOnlinePlayers()) {
 
+                new PlayerData(player);
+
                 Team team = TeamManager.setRandomTeam(player);
                 TeamColor teamColor = team.getTeamColor();
 
@@ -61,12 +65,17 @@ public class GameStatsChangeListener implements Listener {
         }
 
         if (newGameStats == GameStats.STOPPING) {
+
             for (Player player : Bukkit.getOnlinePlayers()) {
+
                 if (player.getGameMode() == GameMode.SPECTATOR)
                     continue;
                 player.setGameMode(GameMode.SPECTATOR);
                 player.sendMessage(Lang.getMessage("game.stopping.message", "ERROR", true));
+                Team team = TeamManager.getTeam(player);
+
             }
+
         }
 
         if (newGameStats == GameStats.CLOSING) {

@@ -34,6 +34,7 @@ public class RegisterListeners {
                 new PlayerFoodLevelListener(),
                 new PlayerInteractListener(),
                 new PlayerJoinListener(),
+                new PlayerMoveListener(),
                 new PlayerQuitListener(),
 
                 new BlockPhysicListener(),

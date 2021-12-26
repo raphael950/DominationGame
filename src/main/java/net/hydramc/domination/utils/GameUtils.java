@@ -4,23 +4,22 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.ItemBuilder;
-import me.neznamy.tab.api.TabAPI;
-import me.neznamy.tab.api.TabPlayer;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
-import net.hydramc.domination.team.Region;
+import net.hydramc.domination.player.PlayerData;
 import net.hydramc.domination.team.Team;
 import net.hydramc.domination.team.TeamManager;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class GameUtils {
+
+    private static final Game game = Domination.getGameInstance();
 
     public static void spawn(Player player) {
         player.setGameMode(GameMode.ADVENTURE);
@@ -68,20 +67,42 @@ public class GameUtils {
     }
 
     public static void death(Player player, Entity... attacker) {
+
+        Team team = TeamManager.getTeam(player);
+
         player.setGameMode(GameMode.SPECTATOR);
-        // TODO: Death system
+
+        PlayerData playerData = PlayerData.get(player);
+
+        playerData.setDead(true);
+
+        AtomicInteger seconds = new AtomicInteger(5);
+        Domination.getInstance().getServer().getScheduler().runTaskTimer(Domination.getInstance(), () -> {
+
+            ActionBar.sendPlayerActionBar(player, Lang.getMessage("game.during.dead_action_bar", "ERROR", true, seconds));
+            seconds.addAndGet(-1);
+
+        }, 20L, 100L);
+
+        player.teleport(Locations.getSpawn(team.getName()));
+        playerData.setDead(false);
+
+        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
+
 
     }
 
-    public static String reverseTeam(String team) {
-        if (team.equals("red"))
-            return "blue";
-        return "red";
+    public static Team reverseTeam(Team team) {
+        Team red = game.getRed();
+        Team blue = game.getBlue();
+
+        if (team == red)
+            return blue;
+        return red;
     }
 
 
     public static void sendAllLobby() {
-        Game game = Domination.getGameInstance();
         Team random = game.getRandom();
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             GameUtils.spawn(player);
@@ -89,7 +110,16 @@ public class GameUtils {
         }
     }
 
-    public static boolean isEnemyArea(Team team, Location location, Game game) {
+    public static boolean isInArea(Team team, Location location, Game game) {
+        if (team == null)
+            return false;
+        if (team.getName().equals("red")) {
+            return game.getRedRegion().isInCircle(location);
+        }
+        return game.getBlueRegion().isInCircle(location);
+    }
+
+    public static boolean isInEnemyArea(Team team, Location location, Game game) {
         if (team == null)
             return false;
         if (team.getName().equals("red")) {

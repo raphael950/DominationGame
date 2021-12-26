@@ -1,8 +1,5 @@
 package net.hydramc.domination.team;
 
-import io.netty.util.internal.StringUtil;
-import me.neznamy.tab.api.TabAPI;
-import me.neznamy.tab.api.TabPlayer;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import org.bukkit.entity.Player;

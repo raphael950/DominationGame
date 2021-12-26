@@ -35,19 +35,13 @@ public class DamageListener implements Listener {
         final Entity victimEntity = event.getEntity();
         final Entity damagerEntity = event.getDamager();
 
-        final Team red = game.getRed();
-        final Team blue = game.getBlue();
-        final double damageValue = event.getFinalDamage();
-
         switch (victimEntity.getType()) {
 
             case PLAYER:
                 break;
 
-            case ENDER_CRYSTAL:
+            case IRON_GOLEM:
                 event.setCancelled(true);
-                // TODO: Target is endercrystal
-                damagerEntity.sendMessage("En dev");
                 return;
 
             default:
@@ -59,15 +53,18 @@ public class DamageListener implements Listener {
 
         // Here victim is Player
 
-        // TEMP FOR TEST
-        event.setDamage(0);
+        final Team red = game.getRed();
+        final Team blue = game.getBlue();
+        final double damageValue = event.getFinalDamage();
 
-        // TEMP FOR TEST
-        /*if (damageValue >= victim.getHealth()) {
+        if (damageValue >= victim.getHealth()) {
+
             event.setDamage(0);
             GameUtils.death(victim, damagerEntity);
+
             return;
-        }*/
+
+        }
 
         if (!damagerEntity.getType().equals(EntityType.PLAYER)) return;
 
