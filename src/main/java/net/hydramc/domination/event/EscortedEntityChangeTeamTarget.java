@@ -22,6 +22,10 @@ public class EscortedEntityChangeTeamTarget extends Event implements Cancellable
         this.cancelled = false;
     }
 
+    public EscortedEntity getEscortedEntity() {
+        return this.escortedEntity;
+    }
+
     public Team getLastTarget() {
         return this.lastTarget;
     }
