@@ -45,7 +45,7 @@ public class Game {
 
         this.scoreboardManager = new ScoreboardManager();
 
-        this.red = new Team("red", new TeamColor("Rouge", "§c", "&l▲"));
+        this.red = new Team("red", new TeamColor("Rouge", "§c", "&l▲§r"));
         this.blue = new Team("blue", new TeamColor("Bleue", "§9", "■"));
         this.random = new Team("random", new TeamColor("", "§7", ""));
 
@@ -89,10 +89,11 @@ public class Game {
     }
 
     public boolean setGameStats(GameStats newStats) {
-        if (newStats == null || this.gameStats == newStats)
+        if (newStats == null || this.gameStats == newStats
+                || (this.gameStats.ordinal() >= 2 && this.gameStats.ordinal() > newStats.ordinal()))
             return false;
-        this.gameStats = newStats;
         Bukkit.getPluginManager().callEvent(new GameStatsChangeEvent(newStats));
+        this.gameStats = newStats;
         return true;
     }
 

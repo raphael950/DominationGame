@@ -58,6 +58,10 @@ public class GameStatsChangeListener implements Listener {
             }
         }
 
+        if (lastGameStats == GameStats.CLOSING) {
+            Bukkit.getServer().shutdown();
+        }
+
     }
 
 }
