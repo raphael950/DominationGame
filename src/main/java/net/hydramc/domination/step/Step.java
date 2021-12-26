@@ -4,6 +4,7 @@ import net.hydramc.domination.game.Game;
 import net.hydramc.domination.scoreboard.ScoreboardBuilder;
 import org.bukkit.entity.Player;
 
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Step {
@@ -61,8 +62,8 @@ public abstract class Step {
 
     public abstract void update();
 
-    public void updateScoreboard(Player player, Game game) {
-        ScoreboardBuilder.build(player, game);
+    public List<String> buildScoreboard(Player player, Game game) {
+        return ScoreboardBuilder.build(player, game);
     }
 
     public boolean canStepBack() {
