@@ -29,11 +29,7 @@ public class PlayerQuitListener implements Listener {
 
         Player player = event.getPlayer();
 
-        ScoreboardBuilder.deleteBoard(player);
-
         TeamManager.removeTeam(player);
-
-        ScoreboardManager.updateAllPlayers();
 
         switch(Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
             case WAITING:
