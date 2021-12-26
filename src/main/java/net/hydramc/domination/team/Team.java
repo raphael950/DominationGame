@@ -40,7 +40,7 @@ public class Team {
     }
 
     public TeamColor getTeamColor() {
-        return this.teamColor;
+        return teamColor;
     }
 
     public WeakHashSet<Player> getPlayers() {

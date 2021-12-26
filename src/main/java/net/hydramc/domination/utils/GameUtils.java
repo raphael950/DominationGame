@@ -4,6 +4,8 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.ItemBuilder;
+import me.neznamy.tab.api.TabAPI;
+import me.neznamy.tab.api.TabPlayer;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.team.Region;
@@ -79,17 +81,22 @@ public class GameUtils {
 
 
     public static void sendAllLobby() {
+        Game game = Domination.getGameInstance();
+        Team random = game.getRandom();
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             GameUtils.spawn(player);
-            TeamManager.setRandom(player);
+            TeamManager.waitingTeam(player, random, true);
         }
     }
 
     public static boolean isEnemyArea(Team team, Location location, Game game) {
+        if (team == null)
+            return false;
         if (team.getName().equals("red")) {
             return game.getBlueRegion().isInCircle(location);
         }
         return game.getRedRegion().isInCircle(location);
     }
+
 
 }

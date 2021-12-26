@@ -28,16 +28,13 @@ public class PlayerBlockListener implements Listener {
 
         final Game game = Domination.getGameInstance();
 
-        if (!GameStats.DURING.equals(game.getGameStats())) {
+        if (!GameStats.DURING.equals(game.getGameStats()) || player.getWorld().getName().equals("world")) {
             event.setCancelled(true);
             return;
         }
 
         final Location location = event.getBlock().getLocation();
         final Team team = TeamManager.getTeam(player);
-
-        if (team == null)
-            return;
 
         if (GameUtils.isEnemyArea(team, location, game)) {
             event.setCancelled(true);
@@ -56,16 +53,13 @@ public class PlayerBlockListener implements Listener {
 
         final Game game = Domination.getGameInstance();
 
-        if (!GameStats.DURING.equals(game.getGameStats())) {
+        if (!GameStats.DURING.equals(game.getGameStats()) || player.getWorld().getName().equals("world")) {
             event.setCancelled(true);
             return;
         }
 
         final Location location = event.getBlock().getLocation();
         final Team team = TeamManager.getTeam(player);
-
-        if (team == null)
-            return;
 
         if (GameUtils.isEnemyArea(team, location, game)) {
             event.setCancelled(true);

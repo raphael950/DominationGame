@@ -14,10 +14,15 @@ repositories {
     mavenCentral()
     maven { url 'https://nexus.mrcubee.net/repository/minecraft/' }
     maven { url 'https://jitpack.io' }
+
+    // TabApi (tab + nametags)
+    maven { url 'https://repo.kryptonmc.org/releases' }
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+
+    compileOnly 'me.neznamy:tab-api:3.0.1'
 
     implementation 'fr.mrcubee.library:weak-utilities:1.0'
     implementation 'fr.mrcubee.minecraft.library:plugin-annotation:1.0'

@@ -21,7 +21,6 @@ import java.util.Set;
 public class Game {
 
     private final GameSetting gameSetting;
-    private final ScoreboardManager scoreboardManager;
     private final StepManager stepManager;
     private final Timer timer;
     private final Set<Player> players;
@@ -29,9 +28,10 @@ public class Game {
     private GameStats gameStats;
     private final Region redRegion;
     private final Region blueRegion;
-    private Team red;
-    private Team blue;
-    private Team random;
+    private final Team red;
+    private final Team blue;
+    private final Team random;
+    private final ScoreboardManager scoreboardManager;
 
     public Game() {
         final Plugin plugin = (Plugin) PluginFinder.INSTANCE.findPluginCaller();
@@ -39,22 +39,21 @@ public class Game {
         this.gameStats = GameStats.OPENING;
         this.locationConfig = new Config("locations.yml", plugin);
         this.gameSetting = new GameSetting();
-        this.scoreboardManager = new ScoreboardManager();
         this.stepManager = new StepManager(this);
         this.timer = new Timer(this);
         this.players = new WeakHashSet<Player>();
 
-        this.red = new Team("red", new TeamColor("Rouge", "§c"));
-        this.blue = new Team("blue", new TeamColor("Bleue", "§9"));
-        this.random = new Team("random", new TeamColor("", "§7"));
+        this.scoreboardManager = new ScoreboardManager();
+
+        this.red = new Team("red", new TeamColor("Rouge", "§c", "&l▲"));
+        this.blue = new Team("blue", new TeamColor("Bleue", "§9", "■"));
+        this.random = new Team("random", new TeamColor("", "§7", ""));
 
         this.redRegion = new Region((Location) locationConfig.getConfig().get("center-red"), 30);
         this.blueRegion = new Region((Location) locationConfig.getConfig().get("center-blue"), 30);
 
-        if (plugin != null) {
-            ConfigAnnotation.loadClass(plugin.getConfig(), gameSetting);
-            this.timer.runTaskTimer(plugin, 0L, 10L);
-        }
+        ConfigAnnotation.loadClass(plugin.getConfig(), gameSetting);
+        this.timer.runTaskTimer(plugin, 0L, 10L);
     }
 
     public Region getRedRegion() {
@@ -85,10 +84,6 @@ public class Game {
         return this.locationConfig;
     }
 
-    public ScoreboardManager getScoreboardManager() {
-        return this.scoreboardManager;
-    }
-
     public StepManager getStepManager() {
         return this.stepManager;
     }
@@ -109,4 +104,7 @@ public class Game {
         return this.players;
     }
 
+    public ScoreboardManager getScoreboardManager() {
+        return this.scoreboardManager;
+    }
 }

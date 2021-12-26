@@ -6,7 +6,9 @@ import net.hydramc.domination.Domination;
 import net.hydramc.domination.event.GameStatsChangeEvent;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.scoreboard.ScoreboardManager;
+import net.hydramc.domination.team.NameTag;
 import net.hydramc.domination.team.Team;
+import net.hydramc.domination.team.TeamColor;
 import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.Locations;
 import net.hydramc.domination.utils.GameUtils;
@@ -39,6 +41,9 @@ public class GameStatsChangeListener implements Listener {
             for (Player player : Bukkit.getOnlinePlayers()) {
 
                 Team team = TeamManager.setRandomTeam(player);
+                TeamColor teamColor = team.getTeamColor();
+
+                NameTag.setNameTag(player, teamColor.getColor() + teamColor.getIcon());
 
                 player.teleport(Locations.getSpawn(team.getName()));
                 player.setGameMode(GameMode.SURVIVAL);

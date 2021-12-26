@@ -1,21 +1,28 @@
 package net.hydramc.domination.team;
 
+import org.bukkit.Bukkit;
+
 public class TeamColor {
 
     private final String prefix;
     private final String color;
+    private final String icon;
 
-    public TeamColor(final String prefix, final String color) {
+    public TeamColor(final String prefix, final String color, final String icon) {
         this.prefix = prefix;
         this.color = color;
+        this.icon = icon;
     }
 
     public String getPrefix() {
-        return this.prefix;
+        return prefix;
     }
 
     public String getColor() {
-        return this.color;
+        return color;
     }
 
+    public String getIcon() {
+        return icon;
+    }
 }

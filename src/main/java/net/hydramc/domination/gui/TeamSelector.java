@@ -32,7 +32,7 @@ public class TeamSelector extends FastInv {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.random.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.whiteBanner(player));
 
-                TeamManager.forceTeam(player, game.getRandom());
+                TeamManager.waitingTeam(player, game.getRandom(), true);
             }
 
         });
@@ -41,12 +41,14 @@ public class TeamSelector extends FastInv {
         // blue team item
         ItemStack blueFlag = new ItemBuilder(Material.BANNER).data(4)
                 .name(Lang.getMessage("game.waiting.gui.blue", "ERROR", true))
+                .lore("§7Membres de l'équipe:")
+                .lore("")
                 .build();
         setItem(2, blueFlag, e -> {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.blue.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.blueBanner(player));
-                TeamManager.forceTeam(player, game.getBlue());
+                TeamManager.waitingTeam(player, game.getBlue(), true);
             }
 
         });
@@ -59,9 +61,11 @@ public class TeamSelector extends FastInv {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.red.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.redBanner(player));
-                TeamManager.forceTeam(player, game.getRed());
+                TeamManager.waitingTeam(player, game.getRed(), true);
             }
         });
+
+        // setItems(getBorders(), new ItemBuilder(Material.STAINED_GLASS_PANE).data(3).build());
 
     }
 

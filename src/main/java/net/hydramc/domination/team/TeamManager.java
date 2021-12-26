@@ -1,5 +1,8 @@
 package net.hydramc.domination.team;
 
+import io.netty.util.internal.StringUtil;
+import me.neznamy.tab.api.TabAPI;
+import me.neznamy.tab.api.TabPlayer;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import org.bukkit.entity.Player;
@@ -38,16 +41,20 @@ public class TeamManager {
         game.getRandom().addPlayer(player);
     }
 
-    public static void forceTeam(Player player, Team team) {
+    public static void waitingTeam(Player player, Team team, Boolean nameTag) {
 
         Team before = getTeam(player);
 
-        if (before == team)
-            return;
         if (before != null) {
+            if (before == team)
+                return;
             before.removePlayer(player);
         }
         team.addPlayer(player);
+        if (nameTag) {
+            TeamColor teamColor = team.getTeamColor();
+            NameTag.setWaitingNameTag(player, teamColor.getColor());
+        }
 
     }
 
