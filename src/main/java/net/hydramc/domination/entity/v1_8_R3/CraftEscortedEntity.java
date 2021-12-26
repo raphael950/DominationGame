@@ -37,8 +37,8 @@ public class CraftEscortedEntity extends CraftIronGolem implements EscortedEntit
         this.teamTarget = event.getTarget();
     }
 
-    public static CraftEscortedEntity spawn(Location location, CreatureSpawnEvent.SpawnReason spawnReason) {
-        final EntityEscortedEntity entityEscortedTarget = EntityEscortedEntity.spawn(location, spawnReason);
+    public static CraftEscortedEntity spawnEntity(Location location, CreatureSpawnEvent.SpawnReason spawnReason) {
+        final EntityEscortedEntity entityEscortedTarget = EntityEscortedEntity.spawnEntity(location, spawnReason);
 
         if (entityEscortedTarget == null)
             return null;

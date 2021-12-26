@@ -46,7 +46,7 @@ public class EntityEscortedEntity extends EntityIronGolem {
         return this.bukkitEntity;
     }
 
-    public static EntityEscortedEntity spawn(Location location, CreatureSpawnEvent.SpawnReason spawnReason) {
+    public static EntityEscortedEntity spawnEntity(Location location, CreatureSpawnEvent.SpawnReason spawnReason) {
         final World world;
         final EntityEscortedEntity result;
 
