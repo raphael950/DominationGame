@@ -42,9 +42,6 @@ public class GameStatsChangeListener implements Listener {
             ScoreboardManager.updateAllPlayers();
 
             for (Player player : Bukkit.getOnlinePlayers()) {
-
-                new PlayerData(player);
-
                 Team team = TeamManager.setRandomTeam(player);
                 TeamColor teamColor = team.getTeamColor();
 
