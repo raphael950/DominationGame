@@ -19,7 +19,6 @@ public class Timer extends BukkitRunnable {
     @Override
     public void run() {
         final GameStats gameStats = this.game.getGameStats();
-        final ScoreboardManager scoreboardManager = this.game.getScoreboardManager();
         final StepManager stepManager = this.game.getStepManager();
         Step step;
 
@@ -27,16 +26,26 @@ public class Timer extends BukkitRunnable {
             cancel();
             return;
         }
+
         if (gameStats.ordinal() < 2 || gameStats.ordinal() > 3) {
-            scoreboardManager.updateAllPlayers();
+            ScoreboardManager.updateAllPlayers();
             return;
         }
+
+        // Get the currently engaged step.
         step = stepManager.getCurrentStep();
+
+        /*
+        If a step is not engaged or if it is completed then the next step will be engaged.
+
+        The step is considered to have no precise duration
+        if the value returned by step.getEndTimeMillis() is equal to or less than -1.
+         */
         if (step == null || step.getEndTimeMillis() == 0)
             step = stepManager.nextStep();
         if (step != null) {
             step.update();
-            for (Player player : Bukkit.getOnlinePlayers())
+            for (Player player : this.game.getPlayers())
                 step.updateScoreboard(player, this.game);
         }
         // TODO: Update kit's effects.
