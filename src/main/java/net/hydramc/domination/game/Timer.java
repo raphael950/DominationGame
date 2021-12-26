@@ -4,7 +4,6 @@ import net.hydramc.GameStats;
 import net.hydramc.domination.scoreboard.ScoreboardManager;
 import net.hydramc.domination.step.Step;
 import net.hydramc.domination.step.StepManager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -20,6 +19,7 @@ public class Timer extends BukkitRunnable {
     public void run() {
         final GameStats gameStats = this.game.getGameStats();
         final StepManager stepManager = this.game.getStepManager();
+        final ScoreboardManager scoreboardManager = this.game.getScoreboardManager();
         Step step;
 
         if (gameStats == GameStats.CLOSING) {
@@ -28,7 +28,7 @@ public class Timer extends BukkitRunnable {
         }
 
         if (gameStats.ordinal() < 2 || gameStats.ordinal() > 3) {
-            ScoreboardManager.updateAllPlayers();
+            scoreboardManager.update();
             return;
         }
 
@@ -46,7 +46,7 @@ public class Timer extends BukkitRunnable {
         if (step != null) {
             step.update();
             for (Player player : this.game.getPlayers())
-                step.updateScoreboard(player, this.game);
+                step.buildScoreboard(player, this.game);
         }
         // TODO: Update kit's effects.
     }
