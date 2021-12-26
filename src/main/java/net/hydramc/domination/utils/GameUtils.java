@@ -69,12 +69,10 @@ public class GameUtils {
     public static void death(Player player, Entity... attacker) {
 
         Team team = TeamManager.getTeam(player);
+        PlayerData playerData = game.getPlayerStatsManager().getPlayerStats(player);
 
+        playerData.isDead = true;
         player.setGameMode(GameMode.SPECTATOR);
-
-        PlayerData playerData = PlayerData.get(player);
-
-        playerData.setDead(true);
 
         AtomicInteger seconds = new AtomicInteger(5);
         Domination.getInstance().getServer().getScheduler().runTaskTimer(Domination.getInstance(), () -> {
@@ -85,10 +83,12 @@ public class GameUtils {
         }, 20L, 100L);
 
         player.teleport(Locations.getSpawn(team.getName()));
-        playerData.setDead(false);
-
+        playerData.isDead = false;
         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
 
+        for (Player all : Bukkit.getOnlinePlayers()) {
+            all.sendMessage(Lang.getMessage(all, "game.during.death_broadcast", "ERROR", true, player.getName()));
+        }
 
     }
 
