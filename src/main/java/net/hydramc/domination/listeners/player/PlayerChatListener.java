@@ -24,8 +24,6 @@ public class PlayerChatListener implements Listener {
         if (player.hasPermission("group.staff") || player.hasPermission("group.vip"))
             message = ChatColor.translateAlternateColorCodes('&', message);
 
-        // TODO
-
         BaseComponent[] component = new ComponentBuilder("§c§l⚠")
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + message))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§cCliquez pour Signaler").create()))
