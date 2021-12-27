@@ -25,9 +25,7 @@ public interface EscortedEntity extends IronGolem {
             method = craftEscortedEntityClass.getDeclaredMethod("spawnEntity", Location.class, CreatureSpawnEvent.SpawnReason.class);
             method.setAccessible(true);
             return (EscortedEntity) method.invoke(null, location, spawnReason);
-        } catch (Exception ignored) {
-            ignored.printStackTrace();
-        }
+        } catch (Exception ignored) {}
         return null;
     }
 
