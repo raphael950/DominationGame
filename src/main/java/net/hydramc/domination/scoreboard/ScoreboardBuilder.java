@@ -9,7 +9,9 @@ import java.util.*;
 public class ScoreboardBuilder {
 
     public static List<String> build(Player player, Game game) {
-        List<String> lines = new ArrayList<String>();
+        List<String> lines = new ArrayList<>();
+
+        lines.add("§3§lDomination");
 
         if (game.getGameStats().ordinal() > 2) {
             lines.addAll(Arrays.asList(

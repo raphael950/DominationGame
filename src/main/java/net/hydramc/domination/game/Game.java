@@ -43,9 +43,9 @@ public class Game {
         this.gameSetting = new GameSetting();
         this.stepManager = new StepManager(this);
         this.playerStatsManager = new PlayerStatsManager();
-        this.scoreboardManager = new ScoreboardManager();
+        this.scoreboardManager = new ScoreboardManager(this);
         this.timer = new Timer(this);
-        this.players = new WeakHashSet<Player>();
+        this.players = new WeakHashSet<>();
 
         this.red = new Team("red", new TeamColor("Rouge", "§c", "&l▲§r"));
         this.blue = new Team("blue", new TeamColor("Bleue", "§9", "■"));

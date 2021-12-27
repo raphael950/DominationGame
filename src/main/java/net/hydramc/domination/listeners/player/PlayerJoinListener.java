@@ -4,7 +4,6 @@ import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.game.GameSetting;
-import net.hydramc.domination.scoreboard.ScoreboardManager;
 import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.ActionBar;
 import net.hydramc.domination.utils.GameUtils;
@@ -14,8 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-
-import java.util.Objects;
 
 public class PlayerJoinListener implements Listener {
 
@@ -33,8 +30,6 @@ public class PlayerJoinListener implements Listener {
             game.setGameStats(GameStats.STARTING);
 
         Player player = event.getPlayer();
-
-        ScoreboardManager.updateAllPlayers();
 
         switch (game.getGameStats()) {
             case WAITING:

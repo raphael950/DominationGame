@@ -6,12 +6,11 @@ import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.event.GameStatsChangeEvent;
 import net.hydramc.domination.game.Game;
-import net.hydramc.domination.player.PlayerData;
-import net.hydramc.domination.scoreboard.ScoreboardManager;
 import net.hydramc.domination.team.NameTag;
 import net.hydramc.domination.team.Team;
 import net.hydramc.domination.team.TeamColor;
 import net.hydramc.domination.team.TeamManager;
+import net.hydramc.domination.utils.GameUtils;
 import net.hydramc.domination.utils.Locations;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -36,16 +35,17 @@ public class GameStatsChangeListener implements Listener {
             return;
         }
 
-        if (newGameStats == GameStats.DURING) {
+        Game game = Domination.getGameInstance();
+        Domination main = Domination.getInstance();
 
-            Game game = Domination.getGameInstance();
-            ScoreboardManager.updateAllPlayers();
+        if (newGameStats == GameStats.DURING) {
 
             for (Player player : Bukkit.getOnlinePlayers()) {
                 Team team = TeamManager.setRandomTeam(player);
                 TeamColor teamColor = team.getTeamColor();
 
                 NameTag.setNameTag(player, teamColor.getColor() + teamColor.getIcon());
+                game.getScoreboardManager().getOrCreate(player);
 
                 player.teleport(Locations.getSpawn(team.getName()));
                 player.setGameMode(GameMode.SURVIVAL);
@@ -70,12 +70,14 @@ public class GameStatsChangeListener implements Listener {
                 player.setGameMode(GameMode.SPECTATOR);
                 player.sendMessage(Lang.getMessage("game.stopping.message", "ERROR", true));
                 Team team = TeamManager.getTeam(player);
+                // TODO: Add coins/exp to player
 
             }
 
         }
 
         if (newGameStats == GameStats.CLOSING) {
+            GameUtils.sendAllLobby();
             Bukkit.getServer().shutdown();
         }
 
