@@ -58,6 +58,8 @@ public class ScoreboardManager {
                 remove(player);
             else {
                 fastBoard = getOrCreate(player);
+                fastBoard.updateTitle(playerLines.get(0));
+                playerLines.remove(0);
                 fastBoard.updateLines(playerLines);
             }
         }
