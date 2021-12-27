@@ -3,6 +3,7 @@ package net.hydramc.domination.commands;
 import fr.mrcubee.langlib.Lang;
 import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
+import net.hydramc.domination.entity.EscortedEntity;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.team.Team;
 import net.hydramc.domination.utils.Config;
@@ -69,6 +70,12 @@ public class DominationCommand implements CommandExecutor {
         Team red = game.getBlue();
         Team blue = game.getRed();
         sender.sendMessage("§8» §7Random§8: §e" + random.getPlayers().toString() + " §cRed§8: §e" + red.getPlayers().toString() + " §9Blue§8: §e" + blue.getPlayers().toString());
+        return true;
+    }
+
+    private boolean golem(Domination plugin, Game game, Player sender, String[] args) {
+        EscortedEntity.spawnEntity(sender.getLocation());
+        sender.sendMessage("tien");
         return true;
     }
 

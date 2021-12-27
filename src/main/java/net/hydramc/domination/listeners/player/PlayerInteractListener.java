@@ -65,7 +65,7 @@ public class PlayerInteractListener implements Listener {
 
         if (gameStats.equals(GameStats.DURING)) {
 
-            Team team = TeamManager.getTeam(player);
+            Team team = game.getTeamManager().getTeam(player);
 
             if (clickedBlock == null)
                 return;

@@ -37,11 +37,12 @@ public class GameStatsChangeListener implements Listener {
 
         Game game = Domination.getGameInstance();
         Domination main = Domination.getInstance();
+        TeamManager teamManager = game.getTeamManager();
 
         if (newGameStats == GameStats.DURING) {
 
             for (Player player : Bukkit.getOnlinePlayers()) {
-                Team team = TeamManager.setRandomTeam(player);
+                Team team = teamManager.setRandomTeam(player);
                 TeamColor teamColor = team.getTeamColor();
 
                 NameTag.setNameTag(player, teamColor.getColor() + teamColor.getIcon());
@@ -69,7 +70,7 @@ public class GameStatsChangeListener implements Listener {
                     continue;
                 player.setGameMode(GameMode.SPECTATOR);
                 player.sendMessage(Lang.getMessage("game.stopping.message", "ERROR", true));
-                Team team = TeamManager.getTeam(player);
+                Team team = teamManager.getTeam(player);
                 // TODO: Add coins/exp to player
 
             }

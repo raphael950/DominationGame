@@ -2,6 +2,7 @@ package net.hydramc.domination.entity;
 
 import net.hydramc.domination.team.Team;
 import net.hydramc.util.Version;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -24,7 +25,9 @@ public interface EscortedEntity extends IronGolem {
             method = craftEscortedEntityClass.getDeclaredMethod("spawnEntity", Location.class, CreatureSpawnEvent.SpawnReason.class);
             method.setAccessible(true);
             return (EscortedEntity) method.invoke(null, location, spawnReason);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
+        }
         return null;
     }
 

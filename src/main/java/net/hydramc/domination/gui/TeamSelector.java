@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 public class TeamSelector extends FastInv {
 
     private final Game game = Domination.getGameInstance();
+    private final TeamManager teamManager = game.getTeamManager();
 
     public TeamSelector(Player player) {
 
@@ -32,7 +33,7 @@ public class TeamSelector extends FastInv {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.random.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.whiteBanner(player));
 
-                TeamManager.waitingTeam(player, game.getRandom(), true);
+                teamManager.waitingTeam(player, game.getRandom(), true);
             }
 
         });
@@ -48,7 +49,7 @@ public class TeamSelector extends FastInv {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.blue.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.blueBanner(player));
-                TeamManager.waitingTeam(player, game.getBlue(), true);
+                teamManager.waitingTeam(player, game.getBlue(), true);
             }
 
         });
@@ -61,7 +62,7 @@ public class TeamSelector extends FastInv {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.red.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.redBanner(player));
-                TeamManager.waitingTeam(player, game.getRed(), true);
+                teamManager.waitingTeam(player, game.getRed(), true);
             }
         });
 

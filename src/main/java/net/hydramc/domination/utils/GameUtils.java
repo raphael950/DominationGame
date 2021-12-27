@@ -68,7 +68,7 @@ public class GameUtils {
 
     public static void death(Player player, Entity... attacker) {
 
-        Team team = TeamManager.getTeam(player);
+        Team team = game.getTeamManager().getTeam(player);
         PlayerData playerData = game.getPlayerStatsManager().getPlayerStats(player);
 
         playerData.isDead = true;
@@ -92,41 +92,26 @@ public class GameUtils {
 
     }
 
-    public static Team reverseTeam(Team team) {
-        Team red = game.getRed();
-        Team blue = game.getBlue();
-
-        if (team == red)
-            return blue;
-        return red;
-    }
-
 
     public static void sendAllLobby() {
         Team random = game.getRandom();
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             GameUtils.spawn(player);
-            TeamManager.waitingTeam(player, random, true);
+            game.getTeamManager().waitingTeam(player, random, true);
         }
     }
 
     public static boolean isInArea(Team team, Location location, Game game) {
         if (team == null)
             return false;
-        if (team.getName().equals("red")) {
-            return game.getRedRegion().isInCircle(location);
-        }
-        return game.getBlueRegion().isInCircle(location);
+        return team.getRegion().isInCircle(location);
     }
 
     public static boolean isInEnemyArea(Team team, Location location, Game game) {
         if (team == null)
             return false;
-        if (team.getName().equals("red")) {
-            return game.getBlueRegion().isInCircle(location);
-        }
-        return game.getRedRegion().isInCircle(location);
+        Team enemy = game.getTeamManager().getEnemyTeam(team);
+        return enemy.getRegion().isInCircle(location);
     }
-
 
 }

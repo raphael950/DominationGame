@@ -26,7 +26,7 @@ public class PlayerMoveListener implements Listener {
             return;
 
         Player player = event.getPlayer();
-        Team team = TeamManager.getTeam(player);
+        Team team = game.getTeamManager().getTeam(player);
 
         if (team == null)
             return;

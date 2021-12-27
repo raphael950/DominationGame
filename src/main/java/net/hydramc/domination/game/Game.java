@@ -10,6 +10,7 @@ import net.hydramc.domination.scoreboard.ScoreboardManager;
 import net.hydramc.domination.step.StepManager;
 import net.hydramc.domination.team.Team;
 import net.hydramc.domination.team.TeamColor;
+import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.Config;
 import net.hydramc.domination.team.Region;
 import org.bukkit.Bukkit;
@@ -28,9 +29,8 @@ public class Game {
     private final Timer timer;
     private final Set<Player> players;
     private final Config locationConfig;
+    private final TeamManager teamManager;
     private GameStats gameStats;
-    private final Region redRegion;
-    private final Region blueRegion;
     private final Team red;
     private final Team blue;
     private final Team random;
@@ -46,24 +46,14 @@ public class Game {
         this.scoreboardManager = new ScoreboardManager(this);
         this.timer = new Timer(this);
         this.players = new WeakHashSet<>();
+        this.teamManager = new TeamManager(this);
 
-        this.red = new Team("red", new TeamColor("Rouge", "§c", "&l▲§r"));
-        this.blue = new Team("blue", new TeamColor("Bleue", "§9", "■"));
+        this.red = new Team("red", new TeamColor("Rouge", "§c", "&l▲§r"), new Region((Location) locationConfig.getConfig().get("center-red"), 30));
+        this.blue = new Team("blue", new TeamColor("Bleue", "§9", "&l▲§r"), new Region((Location) locationConfig.getConfig().get("center-blue"), 30));
         this.random = new Team("random", new TeamColor("", "§7", ""));
-
-        this.redRegion = new Region((Location) locationConfig.getConfig().get("center-red"), 30);
-        this.blueRegion = new Region((Location) locationConfig.getConfig().get("center-blue"), 30);
 
         ConfigAnnotation.loadClass(plugin.getConfig(), gameSetting);
         this.timer.runTaskTimer(plugin, 0L, 10L);
-    }
-
-    public Region getRedRegion() {
-        return this.redRegion;
-    }
-
-    public Region getBlueRegion() {
-        return this.blueRegion;
     }
 
     public Team getRed() {
@@ -114,4 +104,9 @@ public class Game {
     public ScoreboardManager getScoreboardManager() {
         return this.scoreboardManager;
     }
+
+    public TeamManager getTeamManager() {
+        return this.teamManager;
+    }
+
 }

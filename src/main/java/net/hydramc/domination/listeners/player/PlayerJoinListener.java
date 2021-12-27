@@ -33,7 +33,7 @@ public class PlayerJoinListener implements Listener {
 
         switch (game.getGameStats()) {
             case WAITING:
-                TeamManager.waitingTeam(player, game.getRandom(), false);
+                game.getTeamManager().waitingTeam(player, game.getRandom(), false);
                 GameUtils.spawn(player);
                 ActionBar.sendGlobalActionBar("game.waiting.join_action_bar", player.getName(), Bukkit.getOnlinePlayers().size());
                 break;

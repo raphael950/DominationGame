@@ -1,14 +1,17 @@
 package net.hydramc.domination.team;
 
-import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import org.bukkit.entity.Player;
 
 public class TeamManager {
 
-    private static final Game game = Domination.getGameInstance();
+    private final Game game;
 
-    public static Team getTeam(Player player) {
+    public TeamManager(Game game) {
+        this.game = game;
+    }
+
+    public Team getTeam(Player player) {
 
         Team red = game.getRed();
         if (red.isMember(player))
@@ -26,19 +29,27 @@ public class TeamManager {
 
     }
 
-    public static void removeTeam(Player player) {
+    public Team getEnemyTeam(Team team) {
+        Team red = game.getRed();
+        Team blue = game.getBlue();
+        if (game.getRed() == team)
+            return blue;
+        return red;
+    }
+
+    public void removeTeam(Player player) {
         game.getRed().removePlayer(player);
         game.getBlue().removePlayer(player);
         game.getRandom().removePlayer(player);
     }
 
-    public static void setRandom(Player player) {
+    public void setRandom(Player player) {
         game.getRed().removePlayer(player);
         game.getBlue().removePlayer(player);
         game.getRandom().addPlayer(player);
     }
 
-    public static void waitingTeam(Player player, Team team, Boolean nameTag) {
+    public void waitingTeam(Player player, Team team, Boolean nameTag) {
 
         Team before = getTeam(player);
 
@@ -55,14 +66,16 @@ public class TeamManager {
 
     }
 
-    public static Team setRandomTeam(Player player) {
+    public Team setRandomTeam(Player player) {
 
         Team red = game.getRed();
         Team blue = game.getBlue();
+        Team random = game.getRandom();
 
         Team team = getTeam(player);
 
-        if (team == null || game.getRandom().equals(team)) {
+        if (team == null || random == team) {
+            random.removePlayer(player);
             if (red.getSize() < blue.getSize()) {
                 red.addPlayer(player);
                 return red;
@@ -71,9 +84,10 @@ public class TeamManager {
                 blue.addPlayer(player);
                 return blue;
             }
-            double random = Math.random();
 
-            if (random > 0.5) {
+            double randomNumber = Math.random();
+
+            if (randomNumber > 0.5) {
                 red.addPlayer(player);
                 return red;
             }

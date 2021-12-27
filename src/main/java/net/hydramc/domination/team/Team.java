@@ -7,18 +7,21 @@ public class Team {
 
     private final String name;
     private final TeamColor teamColor;
+    private final Region region;
     private WeakHashSet<Player> players;
 
     public Team(final String name, final TeamColor teamColor) {
         this.name = name;
         this.teamColor = teamColor;
         this.players = new WeakHashSet<>();
+        this.region = null;
     }
 
-    public Team(final String name, final TeamColor teamColor, final WeakHashSet<Player> players) {
+    public Team(final String name, final TeamColor teamColor, Region region) {
         this.name = name;
         this.teamColor = teamColor;
-        this.players = players;
+        this.players = new WeakHashSet<>();
+        this.region = region;
     }
 
     public void addPlayer(final Player player) {
@@ -41,6 +44,10 @@ public class Team {
 
     public TeamColor getTeamColor() {
         return teamColor;
+    }
+
+    public Region getRegion() {
+        return this.region;
     }
 
     public WeakHashSet<Player> getPlayers() {

@@ -5,7 +5,6 @@ import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.team.Team;
-import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.ActionBar;
 import net.hydramc.domination.utils.GameUtils;
 import org.bukkit.GameMode;
@@ -34,7 +33,7 @@ public class PlayerBlockListener implements Listener {
         }
 
         final Location location = event.getBlock().getLocation();
-        final Team team = TeamManager.getTeam(player);
+        final Team team = game.getTeamManager().getTeam(player);
 
         if (GameUtils.isInEnemyArea(team, location, game)) {
             event.setCancelled(true);
@@ -59,7 +58,7 @@ public class PlayerBlockListener implements Listener {
         }
 
         final Location location = event.getBlock().getLocation();
-        final Team team = TeamManager.getTeam(player);
+        final Team team = game.getTeamManager().getTeam(player);
 
         if (GameUtils.isInEnemyArea(team, location, game)) {
             event.setCancelled(true);
