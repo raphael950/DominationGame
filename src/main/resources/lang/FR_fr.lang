@@ -22,6 +22,10 @@ game.during.not_assaut=&8» &cVeuillez attendre la phase d'assaut
 game.during.prefix.red="&cRouge "
 game.during.prefix.blue="&9Bleue "
 
+game.during.dead_action_bar=&fVous réapparaîtrez dans &b%s &fsecondes
+game.during.respawning_action_bar=&fRéapparition...
+game.during.death_broadcast==&8» %s &7a été tué par %s
+
 # Commands
 
 command.dm.setlobby=&8» §7La location du &elobby &7a été changé.

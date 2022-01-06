@@ -13,7 +13,7 @@ public class NameTag {
     public static void setNameTag(Player player, String prefix){
 
         TabPlayer tabPlayer = instance.getPlayer(player.getUniqueId());
-        teamManager.setPrefix(tabPlayer, prefix + " ");
+        teamManager.setPrefix(tabPlayer, prefix);
 
     }
 

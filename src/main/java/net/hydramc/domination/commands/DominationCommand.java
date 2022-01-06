@@ -69,7 +69,7 @@ public class DominationCommand implements CommandExecutor {
         Team random = game.getRandom();
         Team red = game.getBlue();
         Team blue = game.getRed();
-        sender.sendMessage("§8» §7Random§8: §e" + random.getPlayers().toString() + " §cRed§8: §e" + red.getPlayers().toString() + " §9Blue§8: §e" + blue.getPlayers().toString());
+        sender.sendMessage("§8» §7Random§8: §e" + random.getPlayers() + " §cRed§8: §e" + red.getPlayers().toString() + " §9Blue§8: §e" + blue.getPlayers().toString());
         return true;
     }
 

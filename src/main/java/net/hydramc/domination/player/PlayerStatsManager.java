@@ -11,19 +11,7 @@ public class PlayerStatsManager {
     private final Map<UUID, PlayerData> currentPlayerStats;
 
     public PlayerStatsManager() {
-        this.currentPlayerStats = new HashMap<UUID, PlayerData>();
-    }
-
-    public PlayerData getPlayerStats(UUID uuid) {
-        if (uuid == null)
-            return null;
-        return this.currentPlayerStats.get(uuid);
-    }
-
-    public PlayerData getPlayerStats(Player player) {
-        if (player == null)
-            return null;
-        return this.currentPlayerStats.get(player.getUniqueId());
+        this.currentPlayerStats = new HashMap<>();
     }
 
     public PlayerData getOrCreatePlayerStats(UUID uuid) {

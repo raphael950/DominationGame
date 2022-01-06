@@ -13,6 +13,7 @@ import net.hydramc.domination.team.TeamColor;
 import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.Config;
 import net.hydramc.domination.team.Region;
+import net.hydramc.domination.utils.TitleManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -30,6 +31,7 @@ public class Game {
     private final Set<Player> players;
     private final Config locationConfig;
     private final TeamManager teamManager;
+    private final TitleManager titleManager;
     private GameStats gameStats;
     private final Team red;
     private final Team blue;
@@ -47,10 +49,11 @@ public class Game {
         this.timer = new Timer(this);
         this.players = new WeakHashSet<>();
         this.teamManager = new TeamManager(this);
+        this.titleManager = new TitleManager();
 
-        this.red = new Team("red", new TeamColor("Rouge", "§c", "&l▲§r"), new Region((Location) locationConfig.getConfig().get("center-red"), 30));
-        this.blue = new Team("blue", new TeamColor("Bleue", "§9", "&l▲§r"), new Region((Location) locationConfig.getConfig().get("center-blue"), 30));
-        this.random = new Team("random", new TeamColor("", "§7", ""));
+        this.red = new Team("red", new TeamColor("Rouge", "§c"), new Region((Location) locationConfig.getConfig().get("center-red"), 30));
+        this.blue = new Team("blue", new TeamColor("Bleue", "§9"), new Region((Location) locationConfig.getConfig().get("center-blue"), 30));
+        this.random = new Team("random", new TeamColor("", "§7"));
 
         ConfigAnnotation.loadClass(plugin.getConfig(), gameSetting);
         this.timer.runTaskTimer(plugin, 0L, 10L);
@@ -109,4 +112,7 @@ public class Game {
         return this.teamManager;
     }
 
+    public TitleManager getTitleManager() {
+        return titleManager;
+    }
 }

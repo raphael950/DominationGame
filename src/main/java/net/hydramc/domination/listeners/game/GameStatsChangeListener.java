@@ -42,11 +42,12 @@ public class GameStatsChangeListener implements Listener {
         if (newGameStats == GameStats.DURING) {
 
             for (Player player : Bukkit.getOnlinePlayers()) {
-                Team team = teamManager.setRandomTeam(player);
+                Team team = teamManager.getOrCreateTeam(player);
                 TeamColor teamColor = team.getTeamColor();
 
-                NameTag.setNameTag(player, teamColor.getColor() + teamColor.getIcon());
+                NameTag.setNameTag(player, teamColor.getColor());
                 game.getScoreboardManager().getOrCreate(player);
+                game.getPlayerStatsManager().getOrCreatePlayerStats(player);
 
                 player.teleport(Locations.getSpawn(team.getName()));
                 player.setGameMode(GameMode.SURVIVAL);
@@ -71,6 +72,7 @@ public class GameStatsChangeListener implements Listener {
                 player.setGameMode(GameMode.SPECTATOR);
                 player.sendMessage(Lang.getMessage("game.stopping.message", "ERROR", true));
                 Team team = teamManager.getTeam(player);
+
                 // TODO: Add coins/exp to player
 
             }

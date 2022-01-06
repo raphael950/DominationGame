@@ -1,17 +1,13 @@
 package net.hydramc.domination.team;
 
-import org.bukkit.Bukkit;
-
 public class TeamColor {
 
     private final String prefix;
     private final String color;
-    private final String icon;
 
-    public TeamColor(final String prefix, final String color, final String icon) {
+    public TeamColor(final String prefix, final String color) {
         this.prefix = prefix;
         this.color = color;
-        this.icon = icon;
     }
 
     public String getPrefix() {
@@ -22,7 +18,4 @@ public class TeamColor {
         return color;
     }
 
-    public String getIcon() {
-        return icon;
-    }
 }

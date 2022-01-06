@@ -3,7 +3,6 @@ package net.hydramc.domination;
 import fr.mrcubee.finder.plugin.PluginFinder;
 import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.FastInvManager;
-import me.neznamy.tab.api.TabAPI;
 import net.hydramc.GameStats;
 import net.hydramc.domination.commands.DominationCommand;
 import net.hydramc.domination.commands.SpawnCommand;

@@ -12,21 +12,16 @@ public class TeamManager {
     }
 
     public Team getTeam(Player player) {
-
         Team red = game.getRed();
         if (red.isMember(player))
             return red;
-
         Team blue = game.getBlue();
         if (blue.isMember(player))
             return blue;
-
         Team random = game.getRandom();
         if (random.isMember(player))
             return random;
-
         return null;
-
     }
 
     public Team getEnemyTeam(Team team) {
@@ -66,7 +61,7 @@ public class TeamManager {
 
     }
 
-    public Team setRandomTeam(Player player) {
+    public Team getOrCreateTeam(Player player) {
 
         Team red = game.getRed();
         Team blue = game.getBlue();

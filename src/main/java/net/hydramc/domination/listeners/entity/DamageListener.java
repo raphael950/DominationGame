@@ -3,8 +3,7 @@ package net.hydramc.domination.listeners.entity;
 import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
-import net.hydramc.domination.team.Team;
-import net.hydramc.domination.utils.GameUtils;
+import net.hydramc.domination.utils.DeathManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -15,17 +14,34 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class DamageListener implements Listener {
 
+    private final Game game = Domination.getGameInstance();
+
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         GameStats gameStats = Domination.getGameInstance().getGameStats();
         if (!GameStats.DURING.equals(gameStats))
             event.setCancelled(true);
+
+        if (!(event.getEntity() instanceof Player))
+            return;
+
+        final Player victim = (Player) event.getEntity();
+        final double damageValue = event.getFinalDamage();
+
+        if (damageValue >= victim.getHealth()) {
+
+            event.setDamage(0);
+
+            if (event instanceof EntityDamageByEntityEvent) {
+                return;
+            }
+            new DeathManager().death(victim);
+
+        }
     }
 
     @EventHandler
     public void onDamageByEntity(EntityDamageByEntityEvent event) {
-
-        final Game game = Domination.getGameInstance();
 
         if (!GameStats.DURING.equals(game.getGameStats())) {
             event.setCancelled(true);
@@ -35,45 +51,26 @@ public class DamageListener implements Listener {
         final Entity victimEntity = event.getEntity();
         final Entity damagerEntity = event.getDamager();
 
-        switch (victimEntity.getType()) {
-
-            case PLAYER:
-                break;
-
-            case IRON_GOLEM:
-                event.setCancelled(true);
-                return;
-
-            default:
-                return;
-
+        if (victimEntity.getType() == EntityType.IRON_GOLEM) {
+            event.setCancelled(true);
+            return;
         }
+
+        if (!(victimEntity instanceof Player)) return;
 
         final Player victim = (Player) victimEntity;
 
-        // Here victim is Player
-
-        final Team red = game.getRed();
-        final Team blue = game.getBlue();
-        final double damageValue = event.getFinalDamage();
-
-        if (damageValue >= victim.getHealth()) {
-
-            event.setDamage(0);
-            GameUtils.death(victim, damagerEntity);
-
-            return;
-
+        if (damagerEntity instanceof Player) {
+            Player damager = (Player) damagerEntity;
+            if (game.getTeamManager().getTeam(victim) == game.getTeamManager().getTeam(damager)) {
+                event.setCancelled(true);
+                return;
+            }
         }
 
-        if (!damagerEntity.getType().equals(EntityType.PLAYER)) return;
-
-        // Here damager is Player
-
-        final Player damager = (Player) damagerEntity;
-
-        if (red.isMember(damager) && red.isMember(victim) || blue.isMember(damager) && blue.isMember(victim))
-            event.setCancelled(true);
+        if (event.getFinalDamage() >= victim.getHealth()) {
+            new DeathManager().death(victim, damagerEntity);
+        }
 
     }
 

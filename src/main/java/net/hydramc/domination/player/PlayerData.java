@@ -12,4 +12,27 @@ public class PlayerData {
         this.isDead = false;
     }
 
+    public int getKills() {
+        return kills;
+    }
+
+    public void addKill() {
+        kills++;
+    }
+
+    public int getDeaths() {
+        return deaths;
+    }
+
+    public void addDeath() {
+        deaths++;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
+    }
 }

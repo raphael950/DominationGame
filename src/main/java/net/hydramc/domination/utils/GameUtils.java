@@ -6,16 +6,14 @@ import fr.mrcubee.langlib.Lang;
 import fr.mrmicky.fastinv.ItemBuilder;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
-import net.hydramc.domination.player.PlayerData;
 import net.hydramc.domination.team.Team;
-import net.hydramc.domination.team.TeamManager;
-import org.bukkit.*;
-import org.bukkit.entity.Entity;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameUtils {
 
@@ -65,33 +63,6 @@ public class GameUtils {
         out.writeUTF("lobby");
         player.sendPluginMessage(Domination.getInstance(), "BungeeCord", out.toByteArray());
     }
-
-    public static void death(Player player, Entity... attacker) {
-
-        Team team = game.getTeamManager().getTeam(player);
-        PlayerData playerData = game.getPlayerStatsManager().getPlayerStats(player);
-
-        playerData.isDead = true;
-        player.setGameMode(GameMode.SPECTATOR);
-
-        AtomicInteger seconds = new AtomicInteger(5);
-        Domination.getInstance().getServer().getScheduler().runTaskTimer(Domination.getInstance(), () -> {
-
-            ActionBar.sendPlayerActionBar(player, Lang.getMessage("game.during.dead_action_bar", "ERROR", true, seconds));
-            seconds.addAndGet(-1);
-
-        }, 20L, 100L);
-
-        player.teleport(Locations.getSpawn(team.getName()));
-        playerData.isDead = false;
-        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
-
-        for (Player all : Bukkit.getOnlinePlayers()) {
-            all.sendMessage(Lang.getMessage(all, "game.during.death_broadcast", "ERROR", true, player.getName()));
-        }
-
-    }
-
 
     public static void sendAllLobby() {
         Team random = game.getRandom();
