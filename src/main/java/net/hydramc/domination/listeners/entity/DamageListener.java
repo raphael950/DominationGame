@@ -4,6 +4,7 @@ import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.utils.DeathManager;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -18,9 +19,11 @@ public class DamageListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
-        GameStats gameStats = Domination.getGameInstance().getGameStats();
-        if (!GameStats.DURING.equals(gameStats))
+
+        if (GameStats.DURING != game.getGameStats()) {
             event.setCancelled(true);
+            return;
+        }
 
         if (!(event.getEntity() instanceof Player))
             return;
@@ -43,7 +46,7 @@ public class DamageListener implements Listener {
     @EventHandler
     public void onDamageByEntity(EntityDamageByEntityEvent event) {
 
-        if (!GameStats.DURING.equals(game.getGameStats())) {
+        if (GameStats.DURING != game.getGameStats()) {
             event.setCancelled(true);
             return;
         }
@@ -67,7 +70,6 @@ public class DamageListener implements Listener {
                 return;
             }
         }
-
         if (event.getFinalDamage() >= victim.getHealth()) {
             new DeathManager().death(victim, damagerEntity);
         }

@@ -32,8 +32,7 @@ public class TeamSelector extends FastInv {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.random.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.whiteBanner(player));
-
-                teamManager.waitingTeam(player, game.getRandom(), true);
+                teamManager.removeTeam(player);
             }
 
         });
@@ -49,7 +48,7 @@ public class TeamSelector extends FastInv {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.blue.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.blueBanner(player));
-                teamManager.waitingTeam(player, game.getBlue(), true);
+                teamManager.setTeam(player, "blue");
             }
 
         });
@@ -62,7 +61,7 @@ public class TeamSelector extends FastInv {
             if (cooldown(e)) {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.red.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.redBanner(player));
-                teamManager.waitingTeam(player, game.getRed(), true);
+                teamManager.setTeam(player, "red");
             }
         });
 

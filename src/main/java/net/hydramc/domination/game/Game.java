@@ -5,17 +5,14 @@ import fr.mrcubee.finder.plugin.PluginFinder;
 import fr.mrcubee.weak.WeakHashSet;
 import net.hydramc.GameStats;
 import net.hydramc.domination.event.GameStatsChangeEvent;
+import net.hydramc.domination.player.PlayerManager;
 import net.hydramc.domination.player.PlayerStatsManager;
 import net.hydramc.domination.scoreboard.ScoreboardManager;
 import net.hydramc.domination.step.StepManager;
-import net.hydramc.domination.team.Team;
-import net.hydramc.domination.team.TeamColor;
 import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.Config;
-import net.hydramc.domination.team.Region;
 import net.hydramc.domination.utils.TitleManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -26,6 +23,7 @@ public class Game {
     private final GameSetting gameSetting;
     private final StepManager stepManager;
     private final PlayerStatsManager playerStatsManager;
+    private final PlayerManager playerManager;
     private final ScoreboardManager scoreboardManager;
     private final Timer timer;
     private final Set<Player> players;
@@ -33,9 +31,6 @@ public class Game {
     private final TeamManager teamManager;
     private final TitleManager titleManager;
     private GameStats gameStats;
-    private final Team red;
-    private final Team blue;
-    private final Team random;
 
     public Game() {
         final Plugin plugin = (Plugin) PluginFinder.INSTANCE.findPluginCaller();
@@ -45,30 +40,15 @@ public class Game {
         this.gameSetting = new GameSetting();
         this.stepManager = new StepManager(this);
         this.playerStatsManager = new PlayerStatsManager();
+        this.playerManager = new PlayerManager(this);
         this.scoreboardManager = new ScoreboardManager(this);
         this.timer = new Timer(this);
         this.players = new WeakHashSet<>();
         this.teamManager = new TeamManager(this);
         this.titleManager = new TitleManager();
 
-        this.red = new Team("red", new TeamColor("Rouge", "§c"), new Region((Location) locationConfig.getConfig().get("center-red"), 30));
-        this.blue = new Team("blue", new TeamColor("Bleue", "§9"), new Region((Location) locationConfig.getConfig().get("center-blue"), 30));
-        this.random = new Team("random", new TeamColor("", "§7"));
-
         ConfigAnnotation.loadClass(plugin.getConfig(), gameSetting);
         this.timer.runTaskTimer(plugin, 0L, 10L);
-    }
-
-    public Team getRed() {
-        return red;
-    }
-
-    public Team getBlue() {
-        return blue;
-    }
-
-    public Team getRandom() {
-        return random;
     }
 
     public GameSetting getGameSetting() {
@@ -102,6 +82,10 @@ public class Game {
 
     public PlayerStatsManager getPlayerStatsManager() {
         return this.playerStatsManager;
+    }
+
+    public PlayerManager getPlayerManager() {
+        return this.playerManager;
     }
 
     public ScoreboardManager getScoreboardManager() {

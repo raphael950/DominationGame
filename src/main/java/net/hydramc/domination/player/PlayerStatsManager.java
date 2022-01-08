@@ -21,23 +21,14 @@ public class PlayerStatsManager {
             return null;
         playerStats = this.currentPlayerStats.get(uuid);
         if (playerStats == null) {
-            playerStats = new PlayerData();
+            playerStats = new PlayerData(uuid);
             this.currentPlayerStats.put(uuid, playerStats);
         }
         return playerStats;
     }
 
     public PlayerData getOrCreatePlayerStats(Player player) {
-        PlayerData playerStats;
-
-        if (player == null)
-            return null;
-        playerStats = this.currentPlayerStats.get(player.getUniqueId());
-        if (playerStats == null) {
-            playerStats = new PlayerData();
-            this.currentPlayerStats.put(player.getUniqueId(), playerStats);
-        }
-        return playerStats;
+        return getOrCreatePlayerStats(player.getUniqueId());
     }
     
 }

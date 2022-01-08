@@ -3,7 +3,6 @@ package net.hydramc.domination.listeners.player;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.game.GameSetting;
-import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.ActionBar;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -27,6 +26,7 @@ public class PlayerQuitListener implements Listener {
 
         Player player = event.getPlayer();
 
+        game.getPlayers().remove(player);
         game.getScoreboardManager().remove(player);
 
         game.getTeamManager().removeTeam(player);

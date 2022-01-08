@@ -28,7 +28,7 @@ public class PlayerChatListener implements Listener {
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + message))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§cCliquez pour Signaler").create()))
                 .reset()
-                .append(player.getName() + " §8» §7" + message)
+                .append("&7" + player.getName() + " §8» §7" + message)
                 .create();
 
         Domination.getInstance().getServer().spigot().broadcast(component);

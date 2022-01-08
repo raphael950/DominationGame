@@ -35,6 +35,7 @@ public class DeathManager {
             if (seconds.intValue() < 0) {
                 countDown.cancel();
                 playerData.setDead(false);
+                player.setHealth(20);
                 player.teleport(Locations.getSpawn(team.getName()));
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
                 player.setGameMode(GameMode.SURVIVAL);
@@ -51,14 +52,10 @@ public class DeathManager {
     }
 
     public void death(Player player, Entity damagerEntity) {
-        Team team = teamManager.getTeam(player);
-        PlayerData playerData = playerStatsManager.getOrCreatePlayerStats(player);
-
-        playerData.setDead(true);
-        player.setGameMode(GameMode.SPECTATOR);
-        player.setSpectatorTarget(damagerEntity);
 
         if (damagerEntity instanceof Player) {
+            Team team = teamManager.getTeam(player);
+
             Player attacker = (Player) damagerEntity;
 
             String victimPrefix = team.getTeamColor().getColor() + player.getName();
@@ -69,24 +66,7 @@ public class DeathManager {
             }
         }
 
-        AtomicInteger seconds = new AtomicInteger(5);
-        countDown = Domination.getInstance().getServer().getScheduler().runTaskTimer(Domination.getInstance(), () -> {
-            if (seconds.intValue() < 0) {
-                countDown.cancel();
-                playerData.setDead(false);
-                player.teleport(Locations.getSpawn(team.getName()));
-                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
-                player.setGameMode(GameMode.SURVIVAL);
-                return;
-            }
-            if (seconds.intValue() == 0) {
-                game.getTitleManager().sendSubtitle(player,8, 15, 5, Lang.getMessage(player, "game.during.respawning_action_bar", "ERROR", true));
-            } else {
-                game.getTitleManager().sendSubtitle(player,8, 15, 5, Lang.getMessage(player, "game.during.dead_action_bar", "ERROR", true, seconds));
-            }
-            seconds.getAndDecrement();
-
-        }, 0L, 20L);
+        death(player);
     }
 
 }

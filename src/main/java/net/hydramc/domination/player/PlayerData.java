@@ -1,12 +1,20 @@
 package net.hydramc.domination.player;
 
+import net.hydramc.domination.team.Team;
+
+import java.util.UUID;
+
 public class PlayerData {
 
-    public int kills;
-    public int deaths;
-    public boolean isDead;
+    private final UUID uuid;
+    private int kills;
+    private int deaths;
+    private boolean isDead;
+    private Team team;
 
-    public PlayerData() {
+
+    public PlayerData(UUID uuid) {
+        this.uuid = uuid;
         this.kills = 0;
         this.deaths = 0;
         this.isDead = false;
@@ -34,5 +42,13 @@ public class PlayerData {
 
     public void setDead(boolean dead) {
         isDead = dead;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Team getTeam() {
+        return team;
     }
 }
