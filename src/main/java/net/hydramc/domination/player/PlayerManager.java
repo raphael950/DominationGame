@@ -1,8 +1,10 @@
 package net.hydramc.domination.player;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import fr.mrmicky.fastinv.ItemBuilder;
+import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
-import net.hydramc.domination.team.NameTag;
 import net.hydramc.domination.team.Team;
 import net.hydramc.domination.team.TeamColor;
 import net.hydramc.domination.team.TeamManager;
@@ -19,19 +21,21 @@ public class PlayerManager {
     private final Game game;
     private final TeamManager teamManager;
 
-    public PlayerManager(Game game) {
+    public PlayerManager(Game game, TeamManager teamManager) {
         this.game = game;
-        this.teamManager = game.getTeamManager();
+        this.teamManager = teamManager;
     }
 
     public void setupPlayers() {
         for (Player player : game.getPlayers()) {
+            PlayerData playerData = game.getPlayerStatsManager().getOrCreatePlayerStats(player);
+            playerData.setDead(true);
+
             Team team = teamManager.getOrGiveTeam(player);
             TeamColor teamColor = team.getTeamColor();
 
-            NameTag.setNameTag(player, teamColor.getColor());
+            game.getNameTagManager().setNameTag(player, teamColor.getColor());
             game.getScoreboardManager().getOrCreate(player);
-            game.getPlayerStatsManager().getOrCreatePlayerStats(player);
 
             player.teleport(Locations.getSpawn(team.getName()));
             player.setGameMode(GameMode.SURVIVAL);
@@ -46,7 +50,16 @@ public class PlayerManager {
             inv.setItem(0, sword);
             inv.setItem(1, gapple);
             inv.setItem(2, pickaxe);
+
+            playerData.setDead(false);
         }
+    }
+
+    public void sendToLobby(Player player) {
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("Connect");
+        out.writeUTF("lobby");
+        player.sendPluginMessage(Domination.getInstance(), "BungeeCord", out.toByteArray());
     }
 
 }

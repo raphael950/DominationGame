@@ -5,6 +5,7 @@ import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
+import net.hydramc.domination.team.NameTagManager;
 import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.ActionBar;
 import net.hydramc.domination.utils.Items;
@@ -20,6 +21,7 @@ public class TeamSelector extends FastInv {
 
     private final Game game = Domination.getGameInstance();
     private final TeamManager teamManager = game.getTeamManager();
+    private final NameTagManager nameTagManager = game.getNameTagManager();
 
     public TeamSelector(Player player) {
 
@@ -33,6 +35,7 @@ public class TeamSelector extends FastInv {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.random.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.whiteBanner(player));
                 teamManager.removeTeam(player);
+                nameTagManager.setWaitingNameTag(player, "&7");
             }
 
         });
@@ -49,6 +52,8 @@ public class TeamSelector extends FastInv {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.blue.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.blueBanner(player));
                 teamManager.setTeam(player, "blue");
+                nameTagManager.setWaitingNameTag(player, "&9");
+
             }
 
         });
@@ -62,6 +67,7 @@ public class TeamSelector extends FastInv {
                 player.sendMessage(Lang.getMessage("game.waiting.gui.red.click", "ERROR", true));
                 player.getInventory().setItem(0, Items.redBanner(player));
                 teamManager.setTeam(player, "red");
+                nameTagManager.setWaitingNameTag(player, "&c");
             }
         });
 

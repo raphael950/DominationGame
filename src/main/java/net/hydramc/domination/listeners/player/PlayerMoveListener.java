@@ -1,14 +1,8 @@
 package net.hydramc.domination.listeners.player;
 
-import fr.mrcubee.langlib.Lang;
 import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
-import net.hydramc.domination.player.PlayerData;
-import net.hydramc.domination.team.Team;
-import net.hydramc.domination.team.TeamManager;
-import net.hydramc.domination.utils.ActionBar;
-import net.hydramc.domination.utils.GameUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,19 +11,19 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class PlayerMoveListener implements Listener {
 
+    private final Game game = Domination.getGameInstance();
+
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
-
-        Game game = Domination.getGameInstance();
 
         if (GameStats.DURING != game.getGameStats())
             return;
 
         Player player = event.getPlayer();
-        Team team = game.getTeamManager().getTeam(player);
+        /*Team team = game.getTeamManager().getTeam(player);
 
         if (team == null)
-            return;
+            return;*/
 
         Location location = player.getLocation();
 

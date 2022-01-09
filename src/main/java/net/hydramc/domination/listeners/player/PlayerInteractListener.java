@@ -6,7 +6,6 @@ import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.gui.TeamSelector;
 import net.hydramc.domination.team.Team;
-import net.hydramc.domination.team.TeamManager;
 import net.hydramc.domination.utils.GameUtils;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -19,10 +18,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class PlayerInteractListener implements Listener {
 
+    private final Game game = Domination.getGameInstance();
+
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
 
-        final Game game = Domination.getGameInstance();
         final GameStats gameStats = Domination.getGameInstance().getGameStats();
         final Player player = event.getPlayer();
 
@@ -52,7 +52,7 @@ public class PlayerInteractListener implements Listener {
 
             switch (event.getItem().getType()) {
                 case BED:
-                    GameUtils.sendToLobby(player);
+                    game.getPlayerManager().sendToLobby(player);
                     break;
                 case BANNER:
                     new TeamSelector(player).open(player);

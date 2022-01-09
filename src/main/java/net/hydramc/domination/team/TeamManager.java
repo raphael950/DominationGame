@@ -68,10 +68,8 @@ public class TeamManager {
     }
 
     public Team getOrGiveTeam(Player player) {
-
         Team red = getTeam("red");
         Team blue = getTeam("blue");
-
         Team team = playerStatsManager.getOrCreatePlayerStats(player).getTeam();
 
         if (team == null) {

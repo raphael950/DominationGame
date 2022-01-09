@@ -1,4 +1,4 @@
-package net.hydramc.domination.utils;
+package net.hydramc.domination.player;
 
 import fr.mrcubee.langlib.Lang;
 import net.hydramc.domination.Domination;
@@ -7,6 +7,7 @@ import net.hydramc.domination.player.PlayerData;
 import net.hydramc.domination.player.PlayerStatsManager;
 import net.hydramc.domination.team.Team;
 import net.hydramc.domination.team.TeamManager;
+import net.hydramc.domination.utils.Locations;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;

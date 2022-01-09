@@ -5,7 +5,6 @@ import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.entity.EscortedEntity;
 import net.hydramc.domination.game.Game;
-import net.hydramc.domination.team.Team;
 import net.hydramc.domination.utils.Config;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -62,14 +61,6 @@ public class DominationCommand implements CommandExecutor {
             sender.sendMessage(Lang.getMessage(sender, "none", "§8» §aLa partie a été arrêté", true));
         else
             sender.sendMessage(Lang.getMessage(sender, "none", "§8» §cLa partie ne peut pas encore être arrêtée", true));
-        return true;
-    }
-
-    private boolean teams(Domination plugin, Game game, Player sender, String[] args) {
-        Team random = game.getRandom();
-        Team red = game.getBlue();
-        Team blue = game.getRed();
-        sender.sendMessage("§8» §7Random§8: §e" + random.getPlayers() + " §cRed§8: §e" + red.getPlayers().toString() + " §9Blue§8: §e" + blue.getPlayers().toString());
         return true;
     }
 

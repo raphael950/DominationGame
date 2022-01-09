@@ -3,6 +3,7 @@ version: 1.0
 api-version: 1.8
 authors: [Twiz0x_x, MrCubee]
 main: net.hydramc.domination.Domination
+depend: [TAB]
 commands:
   spawn:
     description: "Teleport player to spawn"
@@ -15,6 +16,5 @@ commands:
       §8» §b/dm set: §7Placer une position du jeu  \n
       §8» §b/dm start: §7Lancer la partie  \n
       §8» §b/dm stop: §7Terminer la partie  \n
-      §8» §b/dm teams: §7Afficher les joueurs de la partie  \n
       §8» §b/dm golem: §7Faire spawn un golem  \n
       §8§m--------------------------------"

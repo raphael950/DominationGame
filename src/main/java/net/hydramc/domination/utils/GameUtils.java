@@ -57,18 +57,9 @@ public class GameUtils {
         player.teleport(location);
     }
 
-    public static void sendToLobby(Player player) {
-        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-        out.writeUTF("Connect");
-        out.writeUTF("lobby");
-        player.sendPluginMessage(Domination.getInstance(), "BungeeCord", out.toByteArray());
-    }
-
     public static void sendAllLobby() {
-        Team random = game.getRandom();
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             GameUtils.spawn(player);
-            game.getTeamManager().waitingTeam(player, random, true);
         }
     }
 
