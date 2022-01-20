@@ -6,7 +6,6 @@ import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.gui.TeamSelector;
 import net.hydramc.domination.team.Team;
-import net.hydramc.domination.utils.GameUtils;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -73,7 +72,7 @@ public class PlayerInteractListener implements Listener {
             switch (clickedBlock.getType()) {
 
                 case DARK_OAK_FENCE_GATE:
-                    if (GameUtils.isInEnemyArea(team, clickedBlock.getLocation(), game))
+                    if (game.getPlayerManager().isInEnemyArea(team, clickedBlock.getLocation(), game))
                         event.setCancelled(true);
                     break;
 

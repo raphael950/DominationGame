@@ -2,7 +2,6 @@ package net.hydramc.domination.entity;
 
 import net.hydramc.domination.team.Team;
 import net.hydramc.util.Version;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.event.entity.CreatureSpawnEvent;

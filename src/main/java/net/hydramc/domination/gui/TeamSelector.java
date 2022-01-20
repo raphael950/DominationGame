@@ -5,9 +5,9 @@ import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
+import net.hydramc.domination.player.PlayerManager;
 import net.hydramc.domination.team.NameTagManager;
 import net.hydramc.domination.team.TeamManager;
-import net.hydramc.domination.utils.ActionBar;
 import net.hydramc.domination.utils.Items;
 import net.hydramc.domination.utils.Cooldown;
 import net.hydramc.domination.utils.Head;
@@ -20,6 +20,7 @@ import org.bukkit.inventory.ItemStack;
 public class TeamSelector extends FastInv {
 
     private final Game game = Domination.getGameInstance();
+    private final PlayerManager playerManager = game.getPlayerManager();
     private final TeamManager teamManager = game.getTeamManager();
     private final NameTagManager nameTagManager = game.getNameTagManager();
 
@@ -80,7 +81,7 @@ public class TeamSelector extends FastInv {
         Player player = (Player)e.getWhoClicked();
         if (Cooldown.hasCooldown(player)) {
             player.playSound(player.getLocation(), Sound.NOTE_BASS, 1, 1);
-            ActionBar.sendPlayerActionBar(player, Lang.getMessage("gui.cooldown", "ERROR", true));
+            playerManager.sendActionBar(player, Lang.getMessage("gui.cooldown", "ERROR", true));
             return false;
         }
         Cooldown.setCooldown(player, 1);

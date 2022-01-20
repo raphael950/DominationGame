@@ -13,4 +13,7 @@ public class Locations {
         return (Location) Domination.getGameInstance().getLocationConfig().getConfig().get("lobby");
     }
 
+    public static Location getGolem() {
+        return (Location) Domination.getGameInstance().getLocationConfig().getConfig().get("golem");
+    }
 }

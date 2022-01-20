@@ -3,11 +3,13 @@ package net.hydramc.domination.listeners.game;
 import fr.mrcubee.langlib.Lang;
 import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
+import net.hydramc.domination.entity.EscortedEntity;
 import net.hydramc.domination.event.GameStatsChangeEvent;
 import net.hydramc.domination.game.Game;
+import net.hydramc.domination.player.PlayerManager;
 import net.hydramc.domination.team.Team;
 import net.hydramc.domination.team.TeamManager;
-import net.hydramc.domination.utils.GameUtils;
+import net.hydramc.domination.utils.Locations;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -18,6 +20,7 @@ public class GameStatsChangeListener implements Listener {
 
     private final Game game = Domination.getGameInstance();
     private final TeamManager teamManager = game.getTeamManager();
+    private final PlayerManager playerManager = game.getPlayerManager();
 
     @EventHandler
     public void event(GameStatsChangeEvent event) {
@@ -32,6 +35,7 @@ public class GameStatsChangeListener implements Listener {
 
         if (newGameStats == GameStats.DURING) {
             game.getPlayerManager().setupPlayers();
+            EscortedEntity escortedEntity = EscortedEntity.spawnEntity(Locations.getGolem());
             return;
         }
 
@@ -53,7 +57,7 @@ public class GameStatsChangeListener implements Listener {
         }
 
         if (newGameStats == GameStats.CLOSING) {
-            GameUtils.sendAllLobby();
+            playerManager.sendAllLobby();
             Bukkit.getServer().shutdown();
         }
 

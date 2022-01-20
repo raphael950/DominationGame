@@ -3,7 +3,7 @@ package net.hydramc.domination.listeners.player;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.game.GameSetting;
-import net.hydramc.domination.utils.ActionBar;
+import net.hydramc.domination.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,11 +14,13 @@ import java.util.Objects;
 
 public class PlayerQuitListener implements Listener {
 
+    private final Game game = Domination.getGameInstance();
+    private final PlayerManager playerManager = game.getPlayerManager();
+
     @EventHandler
     public void event(PlayerQuitEvent event) {
         event.setQuitMessage("");
 
-        final Game game = Domination.getGameInstance();
         final GameSetting gameSetting;
 
         if (game == null)
@@ -33,7 +35,7 @@ public class PlayerQuitListener implements Listener {
 
         switch(Objects.requireNonNull(Domination.getGameInstance()).getGameStats()) {
             case WAITING:
-                ActionBar.sendGlobalActionBar("game.waiting.leave_action_bar", player.getName(), Bukkit.getOnlinePlayers().size());
+                playerManager.sendGlobalActionBar("game.waiting.leave_action_bar", player.getName(), Bukkit.getOnlinePlayers().size());
                 break;
 
             case DURING:

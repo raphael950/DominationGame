@@ -37,7 +37,7 @@ public class DamageListener implements Listener {
             if (event instanceof EntityDamageByEntityEvent) {
                 return;
             }
-            new DeathManager().death(victim);
+            new DeathManager(game).death(victim);
 
         }
     }
@@ -70,7 +70,7 @@ public class DamageListener implements Listener {
             }
         }
         if (event.getFinalDamage() >= victim.getHealth()) {
-            new DeathManager().death(victim, damagerEntity);
+            new DeathManager(game).death(victim, damagerEntity);
         }
 
     }

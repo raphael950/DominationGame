@@ -4,8 +4,7 @@ import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.game.GameSetting;
-import net.hydramc.domination.utils.ActionBar;
-import net.hydramc.domination.utils.GameUtils;
+import net.hydramc.domination.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -15,11 +14,13 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinListener implements Listener {
 
+    private final Game game = Domination.getGameInstance();
+    private final PlayerManager playerManager = game.getPlayerManager();
+
     @EventHandler
     public void event(PlayerJoinEvent event) {
         event.setJoinMessage("");
 
-        final Game game = Domination.getGameInstance();
         final GameSetting gameSetting;
 
         if (game == null)
@@ -33,8 +34,8 @@ public class PlayerJoinListener implements Listener {
         switch (game.getGameStats()) {
             case WAITING:
                 game.getPlayers().add(player);
-                GameUtils.spawn(player);
-                ActionBar.sendGlobalActionBar("game.waiting.join_action_bar", player.getName(), Bukkit.getOnlinePlayers().size());
+                playerManager.spawnWaiting(player);
+                playerManager.sendGlobalActionBar("game.waiting.join_action_bar", player.getName(), Bukkit.getOnlinePlayers().size());
                 break;
 
             case DURING:

@@ -4,9 +4,8 @@ import fr.mrcubee.langlib.Lang;
 import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
+import net.hydramc.domination.player.PlayerManager;
 import net.hydramc.domination.team.Team;
-import net.hydramc.domination.utils.ActionBar;
-import net.hydramc.domination.utils.GameUtils;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -17,6 +16,9 @@ import org.bukkit.event.block.BlockPlaceEvent;
 
 public class PlayerBlockListener implements Listener {
 
+    private final Game game = Domination.getGameInstance();
+    private final PlayerManager playerManager = game.getPlayerManager();
+
     @EventHandler
     public void onPlace(BlockPlaceEvent event) {
 
@@ -24,8 +26,6 @@ public class PlayerBlockListener implements Listener {
 
         if (player.getGameMode().equals(GameMode.CREATIVE))
             return;
-
-        final Game game = Domination.getGameInstance();
 
         if (!GameStats.DURING.equals(game.getGameStats()) || player.getWorld().getName().equals("world")) {
             event.setCancelled(true);
@@ -35,9 +35,9 @@ public class PlayerBlockListener implements Listener {
         final Location location = event.getBlock().getLocation();
         final Team team = game.getTeamManager().getTeam(player);
 
-        if (GameUtils.isInEnemyArea(team, location, game)) {
+        if (playerManager.isInEnemyArea(team, location, game)) {
             event.setCancelled(true);
-            ActionBar.sendPlayerActionBar(player, Lang.getMessage(player, "game.during.not_assaut", "ERROR", true));
+            playerManager.sendActionBar(player, Lang.getMessage(player, "game.during.not_assaut", "ERROR", true));
         }
 
     }
@@ -60,9 +60,9 @@ public class PlayerBlockListener implements Listener {
         final Location location = event.getBlock().getLocation();
         final Team team = game.getTeamManager().getTeam(player);
 
-        if (GameUtils.isInEnemyArea(team, location, game)) {
+        if (playerManager.isInEnemyArea(team, location, game)) {
             event.setCancelled(true);
-            ActionBar.sendPlayerActionBar(player, Lang.getMessage(player, "game.during.not_assaut", "ERROR", true));
+            playerManager.sendActionBar(player, Lang.getMessage(player, "game.during.not_assaut", "ERROR", true));
         }
 
     }

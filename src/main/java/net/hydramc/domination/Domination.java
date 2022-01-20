@@ -6,10 +6,10 @@ import fr.mrmicky.fastinv.FastInvManager;
 import net.hydramc.GameStats;
 import net.hydramc.domination.commands.DominationCommand;
 import net.hydramc.domination.commands.SpawnCommand;
+import net.hydramc.domination.entity.v1_8_R3.CustomEntityType;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.listeners.RegisterListeners;
 import net.hydramc.domination.utils.Cooldown;
-import net.hydramc.domination.utils.GameUtils;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.plugin.Plugin;
@@ -25,6 +25,8 @@ public class Domination extends JavaPlugin {
         this.getServer().unloadWorld(this.getServer().getWorld("FK-OASIS"), false);
         World fk = new WorldCreator("FK-OASIS").environment(World.Environment.NORMAL).createWorld();
         fk.setAutoSave(false);
+
+        CustomEntityType.registerAllEntities();
 
         this.game = new Game();
         this.game.setGameStats(GameStats.OPENING);
@@ -42,8 +44,6 @@ public class Domination extends JavaPlugin {
 
         getLogger().info("On");
         this.game.setGameStats(GameStats.WAITING);
-
-        GameUtils.sendAllLobby();
 
     }
 
