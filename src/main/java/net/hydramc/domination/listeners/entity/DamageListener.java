@@ -4,6 +4,7 @@ import net.hydramc.GameStats;
 import net.hydramc.domination.Domination;
 import net.hydramc.domination.game.Game;
 import net.hydramc.domination.player.DeathManager;
+import net.hydramc.domination.team.TeamManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -15,6 +16,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class DamageListener implements Listener {
 
     private final Game game = Domination.getGameInstance();
+    private final TeamManager teamManager = game.getTeamManager();
 
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
@@ -64,7 +66,8 @@ public class DamageListener implements Listener {
 
         if (damagerEntity instanceof Player) {
             Player damager = (Player) damagerEntity;
-            if (game.getTeamManager().getTeam(victim) == game.getTeamManager().getTeam(damager)) {
+
+            if (teamManager.getTeam(victim) == teamManager.getTeam(damager)) {
                 event.setCancelled(true);
                 return;
             }

@@ -9,12 +9,10 @@ public class Team {
     private final TeamColor teamColor;
     private final Region region;
     private WeakHashSet<Player> players;
+    private int points;
 
     public Team(final String name, final TeamColor teamColor) {
-        this.name = name;
-        this.teamColor = teamColor;
-        this.players = new WeakHashSet<>();
-        this.region = null;
+        this(name, teamColor, null);
     }
 
     public Team(final String name, final TeamColor teamColor, Region region) {
@@ -22,6 +20,7 @@ public class Team {
         this.teamColor = teamColor;
         this.players = new WeakHashSet<>();
         this.region = region;
+        this.points = 0;
     }
 
     public void addPlayer(final Player player) {
@@ -56,6 +55,18 @@ public class Team {
 
     public int getSize() {
         return this.players.size();
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public void addPoints(int points) {
+        this.points += points;
+    }
+
+    public int getPoints() {
+        return this.points;
     }
 
     public void setPlayers(final WeakHashSet<Player> players) {

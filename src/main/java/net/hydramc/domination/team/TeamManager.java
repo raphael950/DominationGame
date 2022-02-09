@@ -70,7 +70,9 @@ public class TeamManager {
     public Team getOrGiveTeam(Player player) {
         Team red = getTeam("red");
         Team blue = getTeam("blue");
-        Team team = playerStatsManager.getOrCreatePlayerStats(player).getTeam();
+
+        PlayerData playerData = playerStatsManager.getOrCreatePlayerStats(player);
+        Team team = playerData.getTeam();
 
         if (team == null) {
             if (red.getSize() < blue.getSize()) {
@@ -78,21 +80,20 @@ public class TeamManager {
                 return red;
             }
             if (red.getSize() > blue.getSize()) {
-                blue.addPlayer(player);
+                setTeam(player, blue);
                 return blue;
             }
 
             double randomNumber = Math.random();
 
             if (randomNumber > 0.5) {
-                red.addPlayer(player);
+                setTeam(player, blue);
                 return red;
             }
-            blue.addPlayer(player);
+            setTeam(player, blue);
             return blue;
         }
         return team;
-
     }
 
 }

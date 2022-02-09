@@ -16,11 +16,9 @@ public class ScoreboardBuilder {
         if (game.getGameStats().ordinal() > 2) {
             lines.addAll(Arrays.asList(
                     "",
-                    "§7Jour: §b1",
+                    "§7Points: §9" + game.getTeamManager().getTeam("blue") + " §8| §c" + game.getTeamManager().getTeam("red"),
                     "",
-                    "§cRouge: " + "§f500",
-                    "§9Bleu: " + "§f500",
-                    ""
+                    "&eplay.hydramc.net"
             ));
         } else {
             lines.addAll(Arrays.asList(

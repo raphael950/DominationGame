@@ -27,6 +27,8 @@ public class PlayerMoveListener implements Listener {
 
         Location location = player.getLocation();
 
+
+
         /* TODO: Rework this code. Require Team class completed !
         if (playerData.getInBase()) {
             // player is already in his base.
